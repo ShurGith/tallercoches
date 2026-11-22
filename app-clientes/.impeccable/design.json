@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T22:55:25Z",
+  "title": "Design System: TallerCoches",
+  "extensions": {
+    "colorMeta": {
+      "ink": {"role": "primary", "displayName": "Deep Petrol", "canonical": "#15383a", "tonalRamp": ["hsl(183 9% 15%)", "hsl(183 21% 25%)", "hsl(183 33% 35%)", "hsl(183 42% 45%)", "hsl(183 42% 55%)", "hsl(183 33% 65%)", "hsl(183 19% 80%)", "hsl(183 7% 95%)"]},
+      "ink-deep": {"role": "neutral", "displayName": "Dark Petrol", "canonical": "#102d2f", "tonalRamp": ["hsl(184 10% 15%)", "hsl(184 22% 25%)", "hsl(184 34% 35%)", "hsl(184 44% 45%)", "hsl(184 44% 55%)", "hsl(184 34% 65%)", "hsl(184 20% 80%)", "hsl(184 7% 95%)"]},
+      "ink-soft": {"role": "secondary", "displayName": "Soft Petrol", "canonical": "#315455", "tonalRamp": ["hsl(182 5% 15%)", "hsl(182 12% 25%)", "hsl(182 19% 35%)", "hsl(182 24% 45%)", "hsl(182 24% 55%)", "hsl(182 19% 65%)", "hsl(182 11% 80%)", "hsl(182 4% 95%)"]},
+      "canvas": {"role": "neutral", "displayName": "Service-Bay Canvas", "canonical": "#edf2ef", "tonalRamp": ["hsl(144 3% 15%)", "hsl(144 7% 25%)", "hsl(144 11% 35%)", "hsl(144 14% 45%)", "hsl(144 14% 55%)", "hsl(144 11% 65%)", "hsl(144 6% 80%)", "hsl(144 2% 95%)"]},
+      "surface": {"role": "neutral", "displayName": "Clean Work Surface", "canonical": "#ffffff", "tonalRamp": ["hsl(0 0% 15%)", "hsl(0 0% 25%)", "hsl(0 0% 35%)", "hsl(0 0% 45%)", "hsl(0 0% 55%)", "hsl(0 0% 65%)", "hsl(0 0% 80%)", "hsl(0 0% 95%)"]},
+      "surface-tint": {"role": "neutral", "displayName": "Washed Surface", "canonical": "#f5f8f6", "tonalRamp": ["hsl(140 4% 15%)", "hsl(140 8% 25%)", "hsl(140 13% 35%)", "hsl(140 16% 45%)", "hsl(140 16% 55%)", "hsl(140 13% 65%)", "hsl(140 7% 80%)", "hsl(140 3% 95%)"]},
+      "text": {"role": "neutral", "displayName": "Carbon Teal Text", "canonical": "#192f30", "tonalRamp": ["hsl(183 6% 15%)", "hsl(183 14% 25%)", "hsl(183 22% 35%)", "hsl(183 29% 45%)", "hsl(183 29% 55%)", "hsl(183 22% 65%)", "hsl(183 13% 80%)", "hsl(183 5% 95%)"]},
+      "muted": {"role": "neutral", "displayName": "Harbor Muted", "canonical": "#627473", "tonalRamp": ["hsl(177 2% 15%)", "hsl(177 4% 25%)", "hsl(177 6% 35%)", "hsl(177 7% 45%)", "hsl(177 7% 55%)", "hsl(177 6% 65%)", "hsl(177 3% 80%)", "hsl(177 1% 95%)"]},
+      "line": {"role": "neutral", "displayName": "Mist Border", "canonical": "#d7e1de", "tonalRamp": ["hsl(162 3% 15%)", "hsl(162 6% 25%)", "hsl(162 10% 35%)", "hsl(162 13% 45%)", "hsl(162 13% 55%)", "hsl(162 10% 65%)", "hsl(162 6% 80%)", "hsl(162 2% 95%)"]},
+      "lime": {"role": "primary", "displayName": "Workshop Lime", "canonical": "#d8f16a", "tonalRamp": ["hsl(71 17% 15%)", "hsl(71 37% 25%)", "hsl(71 58% 35%)", "hsl(71 75% 45%)", "hsl(71 75% 55%)", "hsl(71 58% 65%)", "hsl(71 33% 80%)", "hsl(71 12% 95%)"]},
+      "lime-deep": {"role": "secondary", "displayName": "Olive Signal", "canonical": "#35530d", "tonalRamp": ["hsl(86 15% 15%)", "hsl(86 33% 25%)", "hsl(86 51% 35%)", "hsl(86 66% 45%)", "hsl(86 66% 55%)", "hsl(86 51% 65%)", "hsl(86 29% 80%)", "hsl(86 11% 95%)"]},
+      "amber": {"role": "status", "displayName": "Warning Ochre", "canonical": "#9a5c08", "tonalRamp": ["hsl(35 18% 15%)", "hsl(35 41% 25%)", "hsl(35 63% 35%)", "hsl(35 81% 45%)", "hsl(35 81% 55%)", "hsl(35 63% 65%)", "hsl(35 36% 80%)", "hsl(35 14% 95%)"]},
+      "amber-bg": {"role": "status-container", "displayName": "Warm Warning Wash", "canonical": "#fff3d8", "tonalRamp": ["hsl(42 20% 15%)", "hsl(42 45% 25%)", "hsl(42 70% 35%)", "hsl(42 90% 45%)", "hsl(42 90% 55%)", "hsl(42 70% 65%)", "hsl(42 40% 80%)", "hsl(42 15% 95%)"]},
+      "red": {"role": "status", "displayName": "Repair Red", "canonical": "#a13c34", "tonalRamp": ["hsl(4 10% 15%)", "hsl(4 23% 25%)", "hsl(4 36% 35%)", "hsl(4 46% 45%)", "hsl(4 46% 55%)", "hsl(4 36% 65%)", "hsl(4 20% 80%)", "hsl(4 8% 95%)"]},
+      "red-bg": {"role": "status-container", "displayName": "Critical Wash", "canonical": "#fde9e6", "tonalRamp": ["hsl(8 17% 15%)", "hsl(8 38% 25%)", "hsl(8 59% 35%)", "hsl(8 77% 45%)", "hsl(8 77% 55%)", "hsl(8 59% 65%)", "hsl(8 34% 80%)", "hsl(8 13% 95%)"]},
+      "green": {"role": "status", "displayName": "Confirmation Green", "canonical": "#2f6848", "tonalRamp": ["hsl(146 8% 15%)", "hsl(146 17% 25%)", "hsl(146 27% 35%)", "hsl(146 34% 45%)", "hsl(146 34% 55%)", "hsl(146 27% 65%)", "hsl(146 15% 80%)", "hsl(146 6% 95%)"]},
+      "green-bg": {"role": "status-container", "displayName": "Success Wash", "canonical": "#e4f2e9", "tonalRamp": ["hsl(141 7% 15%)", "hsl(141 16% 25%)", "hsl(141 25% 35%)", "hsl(141 32% 45%)", "hsl(141 32% 55%)", "hsl(141 25% 65%)", "hsl(141 14% 80%)", "hsl(141 5% 95%)"]}
+    },
+    "shadows": [
+      {"name": "selected-calendar-view", "value": "0 1px 3px rgb(21 56 58 / 13%)", "purpose": "Small separation for the selected calendar tab."},
+      {"name": "current-service-stage", "value": "0 0 0 3px #edf5d6", "purpose": "Subtle ring around the current appointment stage."}
+    ],
+    "motion": [
+      {"name": "state-transition", "value": "140ms ease", "purpose": "Button and control color transitions."},
+      {"name": "mobile-drawer", "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Off-canvas navigation entrance on small screens."}
+    ],
+    "breakpoints": [
+      {"name": "tablet-layout", "value": "1100px"},
+      {"name": "mobile-navigation", "value": "760px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Lime action for the main next step.",
+      "html": "<button class=\"ds-button-primary\">Abrir agenda</button>",
+      "css": ".ds-button-primary { min-height: 42px; padding: 10px 16px; color: var(--ink-deep); background: var(--lime); border: 1px solid var(--lime); border-radius: 8px; font: inherit; font-weight: 650; transition: background-color 140ms ease, border-color 140ms ease; } .ds-button-primary:hover { background: #e3f88a; border-color: #e3f88a; } .ds-button-primary:focus-visible { outline: 3px solid #6f980c; outline-offset: 3px; } .ds-button-primary:active { background: #cbe254; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet bordered alternative for secondary actions.",
+      "html": "<button class=\"ds-button-secondary\">Cancelar</button>",
+      "css": ".ds-button-secondary { min-height: 42px; padding: 9px 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 13px; font-weight: 650; transition: background-color 140ms ease, border-color 140ms ease; } .ds-button-secondary:hover { background: var(--surface-tint); border-color: #aabbb5; } .ds-button-secondary:focus-visible { outline: 3px solid #6f980c; outline-offset: 3px; } .ds-button-secondary:active { background: #e7efeb; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Comfortable field for finding a customer or vehicle.",
+      "html": "<input class=\"ds-input-search\" type=\"search\" aria-label=\"Buscar clientes\" placeholder=\"Buscar por nombre, matrícula o teléfono\">",
+      "css": ".ds-input-search { width: 100%; min-height: 44px; padding: 10px 12px; color: var(--text); background: var(--surface); border: 1px solid #bccbc6; border-radius: 8px; font: inherit; font-size: 14px; } .ds-input-search::placeholder { color: var(--muted); opacity: 1; } .ds-input-search:focus-visible { border-color: var(--ink); outline: 3px solid #6f980c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Active Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-active",
+      "description": "Persistent location cue for the selected workshop area.",
+      "html": "<button class=\"ds-nav-item\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z\"/></svg><span>Resumen</span></button>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 46px; padding: 10px 12px; color: #e3eeea; background: transparent; border: 0; border-radius: 9px; text-align: left; font: inherit; font-size: 14px; font-weight: 570; } .ds-nav-item svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ds-nav-item:hover { color: #fff; background: var(--ink-soft); } .ds-nav-item[aria-current=\"page\"] { color: var(--ink-deep); background: var(--lime); font-weight: 720; } .ds-nav-item:focus-visible { outline: 3px solid #6f980c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pending Status Chip",
+      "kind": "chip",
+      "refersTo": "status-chip-warning",
+      "description": "An amber state for pending work that needs follow-up.",
+      "html": "<span class=\"ds-status-warning\">Pendiente</span>",
+      "css": ".ds-status-warning { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 9px; color: var(--amber); background: var(--amber-bg); border-radius: 999px; font: inherit; font-size: 11px; font-weight: 700; }"
+    },
+    {
+      "name": "Content Panel",
+      "kind": "card",
+      "refersTo": "content-panel",
+      "description": "Flat white work surface for related operational records.",
+      "html": "<section class=\"ds-content-panel\"><h2>Trabajo de hoy</h2><p>Seguimiento de las citas del taller.</p></section>",
+      "css": ".ds-content-panel { padding: 22px; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; } .ds-content-panel h2 { margin: 0; color: var(--text); font: inherit; font-size: 18px; font-weight: 700; } .ds-content-panel p { margin: 6px 0 0; color: var(--muted); font: inherit; font-size: 13px; line-height: 1.5; }"
+    },
+    {
+      "name": "Service Stage Track",
+      "kind": "custom",
+      "refersTo": "service-stage-track",
+      "description": "Connected markers show completed, current, and upcoming workshop stages.",
+      "html": "<ol class=\"ds-stage-track\"><li class=\"is-done\">Recepción</li><li class=\"is-current\" aria-current=\"step\">Diagnóstico</li><li>Reparación</li><li>Entrega</li></ol>",
+      "css": ".ds-stage-track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 14px 0 0; padding: 0; list-style: none; } .ds-stage-track li { position: relative; padding-top: 21px; color: #7a8a86; font: inherit; font-size: 10px; } .ds-stage-track li::before { position: absolute; top: 0; left: 0; width: 9px; height: 9px; content: ''; background: var(--surface); border: 2px solid #bdcbc6; border-radius: 50%; } .ds-stage-track li::after { position: absolute; top: 4px; left: 11px; right: 0; height: 2px; content: ''; background: #d7e1de; } .ds-stage-track li:last-child::after { display: none; } .ds-stage-track li.is-done::before { background: #a9cf50; border-color: #668f22; } .ds-stage-track li.is-done::after { background: #82a83e; } .ds-stage-track li.is-current::before { background: var(--lime); border-color: var(--ink); box-shadow: 0 0 0 3px #edf5d6; } .ds-stage-track li.is-current { color: var(--ink); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Service-Lane Signal Grid",
+    "overview": "This implementation-derived direction is an explicit working assumption, not a confirmed brand choice. TallerCoches should make the workshop's daily flow legible at a glance: keep the main work areas one familiar navigation action away, show the next operational step, and reserve strong color for meaningful state. The visual world pairs a deep petrol rail with a cool service-bay canvas and crisp white work surfaces.\n\nThe interface is practical and calm rather than promotional. Compact labels and aligned information support quick scanning, while the lime accent marks the active destination, current progress, and primary action. Warning and critical colors stay reserved for exceptions. Appointment, estimate, inventory, staff, and schedule examples must remain visibly synthetic until those modules are connected to real persistence.",
+    "keyCharacteristics": [
+      "Operational clarity over decorative dashboard metrics.",
+      "Petrol navigation, cool neutral workspace, and restrained lime signals.",
+      "A connected service-stage track that makes work status visible.",
+      "Synthetic data is explicitly labeled and never presented as persisted."
+    ],
+    "rules": [
+      {"name": "The Signal-Only Accent Rule", "body": "Lime marks an active action, navigation state, or work-progress state; do not use it as decoration.", "section": "colors"},
+      {"name": "The Exception-Only Status Rule", "body": "Amber and red communicate actionable exceptions, not general emphasis.", "section": "colors"},
+      {"name": "The Scan-First Hierarchy Rule", "body": "Use concise headings and compact supporting labels; do not promote secondary metadata above the record or task it describes.", "section": "typography"},
+      {"name": "The Flat-By-Default Rule", "body": "Do not add shadows to ordinary cards or navigation items; reserve depth for a selected control or live progress marker.", "section": "elevation"}
+    ],
+    "dos": [
+      "Do keep daily work, its current stage, and the next action easy to scan.",
+      "Do use the petrol rail and cool neutral workspace to maintain a stable frame between modules.",
+      "Do label synthetic records and state clearly that demo panels are not persisted.",
+      "Do keep keyboard focus visible and make mobile navigation explicit."
+    ],
+    "donts": [
+      "Don't use lime as background decoration or across large content areas.",
+      "Don't use amber or red for non-status emphasis.",
+      "Don't imply synthetic customers, appointments, estimates, or stock are real or saved.",
+      "Don't add decorative shadows to ordinary panels."
+    ]
+  }
+}

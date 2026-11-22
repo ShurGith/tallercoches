@@ -1,0 +1,5 @@
+packages:
+  - app-clientes
+allowBuilds:
+  core-js: true
+  core-js-pure: true
