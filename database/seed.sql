@@ -16,3 +16,25 @@ WHERE NOT EXISTS (
     FROM clientes AS existing
     WHERE LOWER(existing.email) = LOWER(seed.email)
 );
+
+INSERT INTO vehiculos (cliente_id, matricula, marca, modelo, anio, km)
+SELECT c.id, seed.matricula, seed.marca, seed.modelo, seed.anio, seed.km
+FROM (
+    VALUES
+        ('cliente.demo.01@example.test', 'TST0001', 'Seat', 'Ibiza', 2017, 84210),
+        ('cliente.demo.01@example.test', 'TST0002', 'Volkswagen', 'Golf', 2020, 45300),
+        ('cliente.demo.02@example.test', 'TST0003', 'Renault', 'Clio', 2014, 132000),
+        ('cliente.demo.03@example.test', 'TST0004', 'Toyota', 'Corolla', 2019, 67850),
+        ('cliente.demo.04@example.test', 'TST0005', 'Ford', 'Focus', 2016, 98400),
+        ('cliente.demo.05@example.test', 'TST0006', 'Peugeot', '208', 2021, 23100),
+        ('cliente.demo.06@example.test', 'TST0007', 'Opel', 'Corsa', 2012, 156700),
+        ('cliente.demo.07@example.test', 'TST0008', 'Kia', 'Sportage', 2018, 74900),
+        ('cliente.demo.08@example.test', 'TST0009', 'Hyundai', 'Tucson', 2022, 18500)
+) AS seed(email, matricula, marca, modelo, anio, km)
+JOIN clientes AS c ON LOWER(c.email) = LOWER(seed.email)
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM vehiculos AS existing
+    WHERE existing.matricula = seed.matricula
+      AND existing.archivado_en IS NULL
+);

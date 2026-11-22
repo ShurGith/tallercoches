@@ -12,6 +12,15 @@ const navigationItems = [
   { id: 'inventory', label: 'Repuestos', icon: 'inventory' },
   { id: 'team', label: 'Personal', icon: 'team' },
   { id: 'schedule', label: 'Horarios', icon: 'schedule' },
+  { id: 'settings', label: 'Configuración', icon: 'settings' },
+];
+const paletteOptions = [
+  { id: 'azul', label: 'Azul + gris + naranja', colors: ['#1E3A8A', '#F3F4F6', '#F97316'] },
+  { id: 'verde', label: 'Verde + blanco + amarillo', colors: ['#215E33', '#E5E7EB', '#FBBF24'] },
+  { id: 'grafito', label: 'Grafito + celeste + rojo', colors: ['#2E2E2E', '#EEF6FF', '#EF4444'] },
+  { id: 'petroleo', label: 'Azul petróleo + crema + coral', colors: ['#264653', '#F4F1DE', '#E76F51'] },
+  { id: 'morado', label: 'Morado + gris perla + verde lima', colors: ['#5D3A77', '#E1E1E1', '#9BE564'] },
+  { id: 'carbono', label: 'Negro + gris claro + amarillo mostaza', colors: ['#1C1C1C', '#CFCFCF', '#D4A017'] },
 ];
 const pageDetails = {
   overview: ['Resumen', 'El trabajo de hoy y lo que necesita atención.'],
@@ -21,6 +30,7 @@ const pageDetails = {
   inventory: ['Repuestos', 'Existencias de demostración y mínimos orientativos.'],
   team: ['Personal', 'Equipo y turnos de demostración.'],
   schedule: ['Horarios', 'Vista semanal de ejemplo para el equipo.'],
+  settings: ['Configuración', 'Elige la paleta de colores de la aplicación.'],
 };
 
 function getErrorMessage(error) {
@@ -67,7 +77,25 @@ function Icon({ name }) {
       </>
     ),
     menu: <path d="M4 6h16M4 12h16M4 18h16" />,
+    settings: (
+      <>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </>
+    ),
     logout: <path d="M10 17l5-5-5-5M15 12H3M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" />,
+    edit: <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />,
+    car: (
+      <>
+        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+        <path d="M9 17h6" />
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+      </>
+    ),
+    archive: <path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4" />,
+    save: <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8M7 3v5h8" />,
+    close: <path d="M18 6L6 18M6 6l12 12" />,
   };
 
   return (
@@ -245,6 +273,8 @@ function CustomersPanel({
   onArchive,
   onCancel,
 }) {
+  const [vehiculosCliente, setVehiculosCliente] = useState(null);
+
   return (
     <div className="customer-layout">
       <section className="content-section">
@@ -289,8 +319,9 @@ function CustomersPanel({
                       <small className="table-detail">{cliente.telefono || 'Sin teléfono'}</small>
                     </td>
                     <td className="table-actions">
-                      <button className="text-button" onClick={() => onEdit(cliente)} type="button">Editar</button>
-                      <button className="text-button text-danger" onClick={() => onArchive(cliente.id)} type="button">Archivar</button>
+                      <button aria-label="Editar" className="action-chip action-icon action-edit" data-tooltip="Editar" onClick={() => onEdit(cliente)} type="button"><Icon name="edit" /></button>
+                      <button aria-label="Coches" className="action-chip action-icon action-cars" data-tooltip="Coches" onClick={() => setVehiculosCliente(cliente)} type="button"><Icon name="car" /></button>
+                      <button aria-label="Archivar" className="action-chip action-icon action-archive" data-tooltip="Archivar" onClick={() => onArchive(cliente.id)} type="button"><Icon name="archive" /></button>
                     </td>
                   </tr>
                 ))}
@@ -326,6 +357,7 @@ function CustomersPanel({
           </label>
           <div className="form-actions">
             <button className="primary-button" disabled={loading} type="submit">
+              <Icon name="save" />
               {loading ? 'Guardando…' : editingCliente ? 'Guardar cambios' : 'Crear cliente'}
             </button>
             {editingCliente && (
@@ -334,6 +366,7 @@ function CustomersPanel({
                 onClick={onCancel}
                 type="button"
               >
+                <Icon name="close" />
                 Cancelar
               </button>
             )}
@@ -341,7 +374,9 @@ function CustomersPanel({
         </form>
       </section>
 
-      {editingCliente && <VehiclesEditor cliente={editingCliente} key={editingCliente.id} />}
+      {vehiculosCliente && (
+        <VehiclesModal cliente={vehiculosCliente} onClose={() => setVehiculosCliente(null)} />
+      )}
     </div>
   );
 }
@@ -447,8 +482,8 @@ function VehiclesEditor({ cliente }) {
                     </small>
                   </td>
                   <td className="table-actions">
-                    <button className="text-button" onClick={() => startEditing(vehiculo)} type="button">Editar</button>
-                    <button className="text-button text-danger" onClick={() => archiveVehiculo(vehiculo.id)} type="button">Archivar</button>
+                    <button className="action-chip action-edit" onClick={() => startEditing(vehiculo)} type="button"><Icon name="edit" />Editar</button>
+                    <button className="action-chip action-archive" onClick={() => archiveVehiculo(vehiculo.id)} type="button"><Icon name="archive" />Archivar</button>
                   </td>
                 </tr>
               ))}
@@ -481,14 +516,40 @@ function VehiclesEditor({ cliente }) {
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="form-actions">
           <button className="primary-button" disabled={loading} type="submit">
+            <Icon name="save" />
             {loading ? 'Guardando…' : editingId ? 'Guardar vehículo' : 'Añadir vehículo'}
           </button>
           {editingId && (
-            <button className="secondary-button" onClick={resetForm} type="button">Cancelar</button>
+            <button className="secondary-button" onClick={resetForm} type="button"><Icon name="close" />Cancelar</button>
           )}
         </div>
       </form>
     </section>
+  );
+}
+
+function VehiclesModal({ cliente, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="presentation">
+      <div
+        aria-label={`Vehículos de ${cliente.nombre}`}
+        aria-modal="true"
+        className="modal-dialog"
+        onClick={(event) => event.stopPropagation()}
+        role="dialog"
+      >
+        <button aria-label="Cerrar" className="modal-close" onClick={onClose} type="button">×</button>
+        <VehiclesEditor cliente={cliente} />
+      </div>
+    </div>
   );
 }
 
@@ -690,6 +751,33 @@ function TeamPanel() {
   );
 }
 
+function SettingsPanel({ palette, onPaletteChange }) {
+  return (
+    <div className="page-content">
+      <div className="section-heading">
+        <div><h2>Paleta de colores</h2><p>Regla 60-30-10: 60% base, 30% secundario y 10% acento.</p></div>
+      </div>
+      <div className="palette-grid">
+        {paletteOptions.map((option) => (
+          <button
+            aria-pressed={palette === option.id}
+            className="palette-card"
+            key={option.id}
+            onClick={() => onPaletteChange(option.id)}
+            type="button"
+          >
+            <span className="palette-swatches" aria-hidden="true">
+              {option.colors.map((color) => <span key={color} style={{ background: color }} />)}
+            </span>
+            <strong>{option.label}</strong>
+            <small>{option.colors.join(' · ')}</small>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SchedulePanel() {
   return (
     <div className="page-content">
@@ -721,6 +809,11 @@ function App() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [clientes, setClientes] = useState([]);
   const [activeView, setActiveView] = useState('overview');
+  const [palette, setPalette] = useState(() => localStorage.getItem('tc-palette') || 'azul');
+  useEffect(() => {
+    document.documentElement.dataset.palette = palette;
+    localStorage.setItem('tc-palette', palette);
+  }, [palette]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [form, setForm] = useState(emptyCliente);
@@ -969,6 +1062,7 @@ function App() {
           {activeView === 'inventory' && <InventoryPanel />}
           {activeView === 'team' && <TeamPanel />}
           {activeView === 'schedule' && <SchedulePanel />}
+          {activeView === 'settings' && <SettingsPanel palette={palette} onPaletteChange={setPalette} />}
         </div>
       </main>
     </div>

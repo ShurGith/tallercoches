@@ -53,7 +53,7 @@ test('adds a plated vehicle to the customer being edited', async () => {
 
   await renderAuthenticatedApp();
   fireEvent.click(await screen.findByRole('button', { name: 'Clientes' }));
-  fireEvent.click((await screen.findAllByRole('button', { name: 'Editar' }))[0]);
+  fireEvent.click((await screen.findAllByRole('button', { name: 'Coches' }))[0]);
 
   expect(await screen.findByText('1234ABC')).toBeInTheDocument();
   fireEvent.change(screen.getByLabelText(/matrícula/i), { target: { name: 'matricula', value: '5678 DEF' } });
@@ -61,6 +61,19 @@ test('adds a plated vehicle to the customer being edited', async () => {
   fireEvent.click(screen.getByRole('button', { name: 'Añadir vehículo' }));
 
   await waitFor(() => expect(api.post).toHaveBeenCalledWith('/clientes/7/vehiculos', expect.objectContaining({ matricula: '5678 DEF', marca: 'Renault' })));
+});
+
+test('opens a customer vehicles section from the customer list', async () => {
+  const cliente = { id: 7, nombre: 'Ana Pérez', email: '', telefono: '', notas: '' };
+  api.get.mockImplementation((url) => Promise.resolve({
+    data: url === '/clientes' ? [cliente] : [],
+  }));
+
+  await renderAuthenticatedApp();
+  fireEvent.click(await screen.findByRole('button', { name: 'Clientes' }));
+  fireEvent.click((await screen.findAllByRole('button', { name: 'Coches' }))[0]);
+
+  expect(await screen.findByRole('heading', { name: 'Vehículos de Ana Pérez' })).toBeInTheDocument();
 });
 
 test('all requested workshop panels are reachable from the sidebar', async () => {
@@ -79,6 +92,18 @@ test('all requested workshop panels are reachable from the sidebar', async () =>
     fireEvent.click(screen.getByRole('button', { name: navigationLabel }));
     expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument();
   });
+});
+
+test('palette choice is applied to the document and remembered', async () => {
+  localStorage.clear();
+  await renderAuthenticatedApp();
+  expect(document.documentElement.dataset.palette).toBe('azul');
+
+  fireEvent.click(screen.getByRole('button', { name: 'Configuración' }));
+  fireEvent.click(screen.getByRole('button', { name: /Verde/ }));
+
+  expect(document.documentElement.dataset.palette).toBe('verde');
+  expect(localStorage.getItem('tc-palette')).toBe('verde');
 });
 
 test('switches the appointments calendar between day, week, and month', async () => {

@@ -10,4 +10,12 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+api.interceptors.response.use(undefined, (error) => {
+  if (error.response?.status === 401 && sessionStorage.getItem('token')) {
+    sessionStorage.removeItem('token');
+    window.location.reload();
+  }
+  return Promise.reject(error);
+});
+
 export default api;

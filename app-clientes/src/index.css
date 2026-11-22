@@ -20,6 +20,68 @@
   --red-bg: #fde9e6;
   --green: #2f6848;
   --green-bg: #e4f2e9;
+  --on-accent: #102d2f;
+}
+
+/* Regla 60-30-10: base (60%) = --ink, secundario (30%) = --canvas, acento (10%) = --lime */
+[data-palette="azul"] {
+  --ink: #1e3a8a;
+  --ink-deep: #172c6b;
+  --ink-soft: #2e4ca0;
+  --canvas: #f3f4f6;
+  --lime: #f97316;
+  --lime-deep: #9a3f0a;
+  --on-accent: #ffffff;
+}
+
+[data-palette="verde"] {
+  --ink: #215e33;
+  --ink-deep: #1a4b29;
+  --ink-soft: #2f7444;
+  --canvas: #e5e7eb;
+  --lime: #fbbf24;
+  --lime-deep: #6b4d05;
+  --on-accent: #1f2937;
+}
+
+[data-palette="grafito"] {
+  --ink: #2e2e2e;
+  --ink-deep: #1f1f1f;
+  --ink-soft: #444444;
+  --canvas: #eef6ff;
+  --lime: #ef4444;
+  --lime-deep: #991b1b;
+  --on-accent: #ffffff;
+}
+
+[data-palette="petroleo"] {
+  --ink: #264653;
+  --ink-deep: #1b333d;
+  --ink-soft: #3a6170;
+  --canvas: #f4f1de;
+  --lime: #e76f51;
+  --lime-deep: #9c3d22;
+  --on-accent: #ffffff;
+}
+
+[data-palette="morado"] {
+  --ink: #5d3a77;
+  --ink-deep: #472b5c;
+  --ink-soft: #7a4f91;
+  --canvas: #e1e1e1;
+  --lime: #9be564;
+  --lime-deep: #3f6b1c;
+  --on-accent: #1f2937;
+}
+
+[data-palette="carbono"] {
+  --ink: #1c1c1c;
+  --ink-deep: #0d0d0d;
+  --ink-soft: #3a3a3a;
+  --canvas: #cfcfcf;
+  --lime: #d4a017;
+  --lime-deep: #6b4f08;
+  --on-accent: #1f2937;
 }
 
 * {
@@ -219,19 +281,36 @@ textarea::placeholder {
   min-height: 42px;
   border-radius: 8px;
   font-weight: 650;
-  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease, transform 150ms ease;
+}
+
+.primary-button,
+.secondary-button,
+.logout-button,
+.menu-toggle,
+.text-button {
+  cursor: pointer;
+}
+
+.primary-button:active:not(:disabled),
+.secondary-button:active,
+.logout-button:active,
+.menu-toggle:active,
+.text-button:active {
+  transform: scale(0.97);
 }
 
 .primary-button {
   padding: 10px 16px;
-  color: var(--ink-deep);
+  color: var(--on-accent);
   background: var(--lime);
   border: 1px solid var(--lime);
 }
 
 .primary-button:hover:not(:disabled) {
-  background: #e3f88a;
-  border-color: #e3f88a;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+  filter: brightness(1.06);
 }
 
 .primary-button:disabled {
@@ -301,7 +380,7 @@ textarea::placeholder {
   width: 36px;
   height: 36px;
   place-items: center;
-  color: var(--ink-deep);
+  color: var(--on-accent);
   background: var(--lime);
   border-radius: 9px;
   font-size: 13px;
@@ -338,13 +417,70 @@ textarea::placeholder {
   font-weight: 570;
 }
 
+.nav-item {
+  transition: background-color 250ms ease, color 250ms ease, transform 150ms ease;
+}
+
 .nav-item:hover {
   color: #ffffff;
   background: var(--ink-soft);
 }
 
+.nav-item:active {
+  transform: scale(0.98);
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.palette-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  color: var(--text);
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 150ms ease;
+}
+
+.palette-card:hover {
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+}
+
+.palette-card:active {
+  transform: scale(0.98);
+}
+
+.palette-card[aria-pressed="true"] {
+  border-color: var(--ink);
+}
+
+.palette-card small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.palette-swatches {
+  display: flex;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Proporciones 60 / 30 / 10 */
+.palette-swatches span:nth-child(1) { flex: 6; }
+.palette-swatches span:nth-child(2) { flex: 3; }
+.palette-swatches span:nth-child(3) { flex: 1; }
+
 .nav-item[aria-current="page"] {
-  color: var(--ink-deep);
+  color: var(--on-accent);
   background: var(--lime);
   font-weight: 720;
 }
@@ -557,6 +693,124 @@ textarea::placeholder {
   color: var(--red);
 }
 
+.primary-button,
+.secondary-button,
+.action-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.primary-button .icon,
+.secondary-button .icon,
+.action-chip .icon {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.action-chip {
+  min-height: 32px;
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.action-chip:hover {
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+  filter: brightness(1.06);
+}
+
+.action-chip:active {
+  transform: scale(0.97);
+}
+
+.table-actions .action-icon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  min-height: 0;
+  margin-right: 8px;
+  padding: 0;
+  justify-content: center;
+}
+
+.table-actions .action-icon:last-child {
+  margin-right: 0;
+}
+
+.table-actions .action-icon {
+  position: relative;
+}
+
+.table-actions .action-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--ink-deep);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+.table-actions .action-edit::after {
+  background: var(--ink);
+  color: #fff;
+}
+
+.table-actions .action-cars::after {
+  background: var(--lime);
+  color: var(--on-accent);
+}
+
+.table-actions .action-archive::after {
+  background: var(--red);
+  color: #fff;
+}
+
+.table-actions .action-icon:hover::after,
+.table-actions .action-icon:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.table-actions .action-icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.action-edit {
+  color: #fff;
+  background: color-mix(in srgb, var(--ink) 80%, transparent);
+}
+
+.action-cars {
+  color: var(--on-accent);
+  background: color-mix(in srgb, var(--lime) 80%, transparent);
+}
+
+.action-archive {
+  color: #fff;
+  background: color-mix(in srgb, var(--red) 80%, transparent);
+}
+
 .job-list {
   display: grid;
 }
@@ -727,8 +981,47 @@ textarea::placeholder {
   gap: 20px;
 }
 
-.vehicles-section {
-  grid-column: 1 / -1;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(16, 45, 47, 0.45);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 24px 60px rgba(16, 45, 47, 0.25);
+}
+
+.modal-dialog .vehicles-section {
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-tint);
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .customer-heading {
@@ -873,28 +1166,27 @@ textarea::placeholder {
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
+  border: 1px solid currentColor;
   white-space: nowrap;
 }
-
-.status-demo,
 .status-neutral {
   color: #38595a;
-  background: #e5eeea;
+  background: color-mix(in srgb, #e5eeea 55%, transparent);
 }
 
 .status-pendiente {
   color: var(--amber);
-  background: var(--amber-bg);
+  background: color-mix(in srgb, var(--amber-bg) 55%, transparent);
 }
 
 .status-aprobado {
   color: var(--green);
-  background: var(--green-bg);
+  background: color-mix(in srgb, var(--green-bg) 55%, transparent);
 }
 
 .status-rechazado {
   color: var(--red);
-  background: var(--red-bg);
+  background: color-mix(in srgb, var(--red-bg) 55%, transparent);
 }
 
 .appointment-list {
