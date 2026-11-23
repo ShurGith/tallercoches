@@ -17,8 +17,7 @@ Crea el `.env` de la raíz (PORT, DATABASE_URL, JWT_SECRET). No está en el repo
 - Tests 8/8 y build compila sin avisos.
 
 ## Pendiente
-1. Verificar en navegador (ver sección "Sin verificar").
-2. Commit y push a `tailwind-migracion`. Si hay error irreparable, volver al último commit bueno.
+Nada. Migración completa y verificada.
 
 ## Reglas
 - Mantener textos, aria-labels, `data-tooltip` y nombres accesibles ("Editar", "Coches") que usa `App.test.js`.
@@ -32,5 +31,5 @@ Crea el `.env` de la raíz (PORT, DATABASE_URL, JWT_SECRET). No está en el repo
 - Build: `pnpm --filter app-clientes build`
 - API: `node index.js` (puerto 4000). Frontend: puerto 3010.
 
-## Sin verificar en navegador
-Tooltips, paletas 4-6, transparencias de badges y botones, redirección 401.
+## Verificado en navegador
+Login, registro (banner de error), Resumen, Clientes (tabla + tooltips "Editar"), modal de vehículos, Presupuestos (badges Pendiente/Aprobado/Rechazado), Citas (día/semana/mes), Repuestos, Personal, Horarios, las 6 paletas y la redirección a login tras 401 (token inválido).
