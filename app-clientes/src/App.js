@@ -106,7 +106,7 @@ function Icon({ name }) {
 }
 
 function DemoNotice({ children = 'Datos sintéticos de demostración. No se guardan en la base de datos.' }) {
-  return <p className="demo-notice">{children}</p>;
+  return <p className="m-0 rounded-[10px] border border-[#c9d8d1] bg-[#e2ece7] px-[15px] py-3 text-[13px] leading-[1.5] text-[#38595a]">{children}</p>;
 }
 
 function StatusBadge({ children, tone = 'neutral' }) {
@@ -922,33 +922,35 @@ function App() {
   if (!token) {
     const registering = authMode === 'register';
     return (
-      <main className="auth-page">
-        <section className="auth-intro">
-          <p className="auth-brand">TallerCoches</p>
-          <div className="auth-intro-copy">
-            <h1>Tu espacio de trabajo.</h1>
-            <p>Accede al panel del taller para continuar con la gestión diaria.</p>
+      <main className="grid min-h-screen grid-cols-[minmax(0,1fr)] gap-3 p-3 min-[761px]:grid-cols-[minmax(0,1fr)_minmax(340px,480px)] min-[761px]:gap-5 min-[761px]:p-6">
+        <section className="flex min-h-[190px] flex-col justify-between rounded-2xl bg-ink p-6 text-[#f5fbf7] min-[761px]:min-h-[calc(100vh_-_48px)] min-[761px]:p-[clamp(32px,6vw,88px)]">
+          <p className="m-0 text-[15px] font-[750] tracking-[0.02em] text-lime">TallerCoches</p>
+          <div className="mb-3.5 mt-[30px] max-w-[620px] min-[761px]:my-auto">
+            <h1 className="m-0 max-w-[12ch] text-[38px] leading-[1.02] tracking-[-0.035em] min-[761px]:max-w-[9ch] min-[761px]:text-[clamp(42px,6vw,76px)]">Tu espacio de trabajo.</h1>
+            <p className="m-0 mt-3 max-w-[38ch] text-[14px] leading-[1.6] text-[#d2e0db] min-[761px]:mt-[22px] min-[761px]:text-[17px]">Accede al panel del taller para continuar con la gestión diaria.</p>
           </div>
-          <p className="auth-footnote">Acceso seguro para el equipo del taller</p>
+          <p className="m-0 hidden text-[13px] text-[#d2e0db] min-[761px]:block">Acceso seguro para el equipo del taller</p>
         </section>
-        <section aria-labelledby="auth-heading" className="auth-card">
-          <h2 id="auth-heading">{registering ? 'Crear cuenta' : 'Iniciar sesión'}</h2>
-          <p className="auth-description">Introduce tus datos para acceder.</p>
-          <form className="auth-form" onSubmit={handleAuthSubmit}>
-            <label>
+        <section aria-labelledby="auth-heading" className="w-full self-start rounded-2xl border border-line bg-surface p-[25px] min-[761px]:self-center min-[761px]:p-[clamp(28px,4vw,48px)]">
+          <h2 className="m-0 text-[28px] tracking-[-0.025em]" id="auth-heading">{registering ? 'Crear cuenta' : 'Iniciar sesión'}</h2>
+          <p className="mb-7 mt-[9px] leading-[1.5] text-muted">Introduce tus datos para acceder.</p>
+          <form className="grid gap-[18px]" onSubmit={handleAuthSubmit}>
+            <label className="grid gap-2 text-[14px] font-[650] text-text">
               Email
               <input
                 autoComplete="email"
+                className="w-full min-h-[44px] rounded-lg border border-[#bccbc6] bg-surface px-3 py-2.5 text-text"
                 onChange={(event) => setCredentials((value) => ({ ...value, email: event.target.value }))}
                 required
                 type="email"
                 value={credentials.email}
               />
             </label>
-            <label>
+            <label className="grid gap-2 text-[14px] font-[650] text-text">
               Contraseña
               <input
                 autoComplete={registering ? 'new-password' : 'current-password'}
+                className="w-full min-h-[44px] rounded-lg border border-[#bccbc6] bg-surface px-3 py-2.5 text-text"
                 minLength={registering ? 8 : undefined}
                 onChange={(event) => setCredentials((value) => ({ ...value, password: event.target.value }))}
                 required
@@ -956,13 +958,15 @@ function App() {
                 value={credentials.password}
               />
             </label>
-            {error && <p className="form-error" role="alert">{error}</p>}
-            <button className="primary-button auth-submit" disabled={loading} type="submit">
+            {error && (
+              <p className="m-0 rounded-lg border border-[#f1c7c1] bg-red-bg px-3.5 py-3 text-[14px] text-red" role="alert">{error}</p>
+            )}
+            <button className="primary-button mt-1 w-full" disabled={loading} type="submit">
               {loading ? 'Procesando…' : registering ? 'Crear cuenta' : 'Entrar'}
             </button>
           </form>
           <button
-            className="auth-toggle"
+            className="mt-5 w-full border-0 bg-transparent p-2 font-[650] text-ink hover:underline hover:underline-offset-[3px]"
             onClick={() => {
               setAuthMode(registering ? 'login' : 'register');
               setError('');
@@ -977,29 +981,33 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className="min-h-screen">
       {mobileMenuOpen && (
         <button
           aria-label="Cerrar navegación"
-          className="nav-backdrop"
+          className="fixed inset-0 z-[19] block border-0 bg-[rgb(16_45_47_/_45%)] min-[761px]:hidden"
           onClick={() => setMobileMenuOpen(false)}
           type="button"
         />
       )}
-      <aside className={`app-sidebar${mobileMenuOpen ? ' is-open' : ''}`}>
-        <a aria-label="TallerCoches, resumen" className="sidebar-brand" href="#resumen" onClick={(event) => {
+      <aside
+        className={`fixed inset-y-0 left-0 z-20 flex w-[min(290px,calc(100vw_-_48px))] flex-col bg-ink px-[18px] pb-[18px] pt-6 text-[#eff7f3] transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] min-[761px]:w-[258px] min-[761px]:visible min-[761px]:transform-none ${
+          mobileMenuOpen ? 'visible translate-x-0' : 'invisible -translate-x-[105%]'
+        }`}
+      >
+        <a aria-label="TallerCoches, resumen" className="flex items-center gap-[11px] px-1.5 py-0.5 text-[17px] font-[750] text-white no-underline" href="#resumen" onClick={(event) => {
           event.preventDefault();
           navigateTo('overview');
         }}>
-          <span aria-hidden="true" className="brand-mark">TC</span>
+          <span aria-hidden="true" className="grid h-9 w-9 place-items-center rounded-[9px] bg-lime text-[13px] font-[850] tracking-[-0.04em] text-on-accent">TC</span>
           <span>TallerCoches</span>
         </a>
-        <nav aria-label="Navegación principal" className="sidebar-nav" id="primary-navigation">
-          <p className="nav-heading">Espacio de trabajo</p>
+        <nav aria-label="Navegación principal" className="mt-12 grid gap-[5px]" id="primary-navigation">
+          <p className="mx-2.5 mb-2.5 mt-0 text-[12px] font-[650] text-[#b7cbc4]">Espacio de trabajo</p>
           {navigationItems.map((item) => (
             <button
               aria-current={activeView === item.id ? 'page' : undefined}
-              className="nav-item"
+              className="flex min-h-[46px] w-full items-center gap-3 rounded-[9px] border-0 bg-transparent px-3 py-2.5 text-left text-[14px] font-[570] text-[#e3eeea] transition duration-200 hover:bg-ink-soft hover:text-white active:scale-95 aria-[current=page]:bg-lime aria-[current=page]:font-[720] aria-[current=page]:text-on-accent"
               key={item.id}
               onClick={() => navigateTo(item.id)}
               type="button"
@@ -1009,35 +1017,39 @@ function App() {
             </button>
           ))}
         </nav>
-        <div className="sidebar-footer">
-          <span className="sidebar-indicator" />
+        <div className="mt-auto flex items-center gap-[9px] border-t border-[#466465] px-2 pb-1 pt-[18px] text-[12px] text-[#d2e0db]">
+          <span className="h-2 w-2 rounded-full bg-lime" />
           <span>Módulos nuevos · datos demo</span>
         </div>
       </aside>
 
-      <main className="app-main">
-        <header className="app-header">
+      <main className="min-w-0 ml-0 min-[761px]:ml-[258px]">
+        <header className="flex min-h-[78px] items-center gap-4 border-b border-line bg-surface px-[18px] py-3.5 min-[761px]:min-h-[94px] min-[761px]:px-[clamp(22px,4vw,54px)] min-[761px]:py-[18px]">
           <button
             aria-controls="primary-navigation"
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            className="menu-toggle"
+            className="inline-flex min-h-[40px] w-10 min-w-[40px] cursor-pointer items-center justify-center gap-[9px] rounded-lg border border-line bg-surface p-2 font-[650] text-ink shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 active:scale-95 min-[761px]:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             type="button"
           >
             <Icon name="menu" />
           </button>
-          <div className="header-title">
-            <h1>{pageDetails[activeView][0]}</h1>
-            <p>{pageDetails[activeView][1]}</p>
+          <div>
+            <h1 className="m-0 text-[20px] leading-[1.2] tracking-[-0.025em] min-[761px]:text-[24px]">{pageDetails[activeView][0]}</h1>
+            <p className="mt-[5px] max-w-[42ch] text-[12px] text-muted min-[761px]:max-w-none min-[761px]:text-[14px]">{pageDetails[activeView][1]}</p>
           </div>
-          <button className="logout-button" onClick={handleLogout} type="button">
+          <button
+            className="ml-auto inline-flex min-h-[40px] w-10 min-w-[40px] cursor-pointer items-center justify-center gap-[9px] overflow-hidden rounded-lg border border-line bg-surface p-2 text-[0] font-[650] text-ink shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 hover:border-[#aabbb5] hover:bg-surface-tint active:scale-95 [&_.icon]:h-[18px] [&_.icon]:w-[18px] min-[761px]:w-auto min-[761px]:min-w-0 min-[761px]:overflow-visible min-[761px]:px-3 min-[761px]:py-2 min-[761px]:text-[13px] min-[761px]:[&_.icon]:h-4 min-[761px]:[&_.icon]:w-4"
+            onClick={handleLogout}
+            type="button"
+          >
             <Icon name="logout" />
             Cerrar sesión
           </button>
         </header>
-        <div className="page-content-wrap">
-          {error && <p className="form-error page-error" role="alert">{error}</p>}
+        <div className="mx-auto w-full max-w-[1500px] px-4 pb-10 pt-[22px] min-[761px]:px-[clamp(20px,4vw,54px)] min-[761px]:pb-14 min-[761px]:pt-8">
+          {error && <p className="mb-5 rounded-lg border border-[#f1c7c1] bg-red-bg px-3.5 py-3 text-[14px] text-red" role="alert">{error}</p>}
           {activeView === 'overview' && <OverviewPanel customerCount={clientes.length} onNavigate={navigateTo} />}
           {activeView === 'clients' && (
             <CustomersPanel
