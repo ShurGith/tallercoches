@@ -10,16 +10,15 @@ pnpm install
 Crea el `.env` de la raíz (PORT, DATABASE_URL, JWT_SECRET). No está en el repo.
 
 ## Estado
-- Rama: `tailwind-migracion` (pusheada a origin). Commit `435470f` = WIP.
-- `main` tiene `f5e259b`: parte 1 completa (auth, shell, sidebar, cabecera).
-- En `435470f`: `App.js` con parte 2 a medias. `CustomersPanel`, `VehiclesEditor`, `VehiclesModal`, `EstimatesPanel`, `AppointmentsPanel` siguen con clases CSS. `index.css` sin tocar. Hay una constante `formError` sin usar (aviso de lint).
-- Tests 8/8 y build compila (con 1 aviso).
+- Rama: `tailwind-migracion` (pusheada a origin).
+- Partes 1, 2 y 3 completas: todos los paneles (Overview, Customers, VehiclesEditor, VehiclesModal, Estimates, Appointments, Inventory, Team, Settings, Schedule) usan utilidades Tailwind.
+- `index.css` limpio: solo quedan `:root`, bloques `[data-palette]`, estilos base, `.sr-only`, scrollbars, `.icon`, tooltips `::after`, `.status-*` y `prefers-reduced-motion`.
+- Aviso de lint de `formError` resuelto (ahora se usa en VehiclesEditor).
+- Tests 8/8 y build compila sin avisos.
 
 ## Pendiente
-1. Parte 2: convertir a utilidades Tailwind: OverviewPanel (ya hecho), CustomersPanel, VehiclesEditor, VehiclesModal, EstimatesPanel, AppointmentsPanel. Borrar de `index.css` lo que ya no se use.
-2. Parte 3: InventoryPanel, TeamPanel, SettingsPanel (paletas), SchedulePanel. Limpieza final de `index.css`.
-3. Verificar: `CI=true pnpm --filter app-clientes test` (8 deben pasar) y `pnpm --filter app-clientes build`.
-4. Commit y push a `tailwind-migracion`. Si hay error irreparable, volver al último commit bueno.
+1. Verificar en navegador (ver sección "Sin verificar").
+2. Commit y push a `tailwind-migracion`. Si hay error irreparable, volver al último commit bueno.
 
 ## Reglas
 - Mantener textos, aria-labels, `data-tooltip` y nombres accesibles ("Editar", "Coches") que usa `App.test.js`.

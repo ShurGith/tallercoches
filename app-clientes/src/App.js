@@ -128,14 +128,31 @@ const actionTone = {
   archive: 'bg-[color-mix(in_srgb,var(--red)_80%,transparent)] text-[#fff]',
 };
 const textButton = 'inline-flex min-h-[34px] cursor-pointer items-center justify-center rounded-lg border-0 bg-transparent px-[9px] py-1.5 text-[13px] font-[650] text-ink transition-colors duration-200 hover:text-lime-deep hover:underline hover:underline-offset-[3px]';
+const pageContent = 'grid gap-[22px]';
 const contentSection = 'min-w-0 rounded-xl border border-line bg-surface p-[22px] max-[760px]:p-[17px]';
-const sectionHeading = 'flex items-start justify-between gap-4';
+const sectionHeading = 'mb-[18px] flex items-start justify-between gap-4';
 const sectionTitle = 'm-0 text-[18px] leading-[1.3] tracking-[-0.02em]';
 const sectionText = 'mb-0 mt-1.5 text-[13px] leading-[1.5] text-muted';
 const searchField = 'block w-[min(100%,290px)] max-[760px]:w-full';
 const emptyState = 'rounded-[10px] border border-dashed border-[#b9c9c3] px-4 py-9 text-center text-muted';
 const loadingMessage = 'px-4 py-9 text-center text-muted';
-const tableActions = 'whitespace-nowrap';
+const customerLayout = 'grid grid-cols-[minmax(0,1fr)_minmax(280px,340px)] items-start gap-5 max-[1100px]:grid-cols-[minmax(0,1fr)]';
+const tableScroll = 'min-w-0 overflow-x-auto';
+const dataTable = 'w-full border-collapse text-left text-[13px] [&_td_strong]:block [&_tbody_tr:last-child_td]:border-b-0';
+const tableHeadCell = 'whitespace-nowrap border-b border-line bg-surface-tint px-3.5 py-3 text-[11px] font-bold text-[#4b6260] max-[760px]:px-[11px]';
+const tableCell = 'border-b border-[#e6ece9] px-3.5 py-[15px] align-middle max-[760px]:px-[11px]';
+const tableDetail = 'mt-1 block max-w-[34ch] overflow-hidden text-ellipsis whitespace-nowrap text-[11px] text-muted';
+const tableActions = 'min-w-[160px] whitespace-nowrap text-right';
+const numericCell = 'tabular-nums whitespace-nowrap';
+const detailText = 'mt-1 text-[12px] leading-[1.5] text-muted';
+const noEvents = 'my-2 text-[11px] text-[#73827f]';
+const teamRow = 'grid grid-cols-[42px_minmax(130px,1fr)_minmax(120px,180px)_auto] items-center gap-[15px] border-b border-[#e6ece9] py-4 last:border-b-0 max-[760px]:grid-cols-[38px_minmax(0,1fr)_auto] max-[760px]:gap-2.5';
+const teamInitials = 'grid h-[38px] w-[38px] place-items-center rounded-full border border-[#cfddd6] bg-[#e2ece7] text-[11px] font-[750] text-ink';
+const teamShift = 'text-[12px] tabular-nums text-muted max-[760px]:col-start-2 max-[760px]:row-start-2';
+const paletteGrid = 'grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-4';
+const paletteCard = 'grid cursor-pointer gap-3 rounded-xl border-2 border-line bg-surface p-[18px] text-left text-text shadow-[0_1px_3px_rgba(15,23,42,0.08)] transition duration-200 hover:shadow-[0_6px_16px_rgba(15,23,42,0.12)] active:scale-[0.98] aria-pressed:border-ink';
+const paletteSwatches = 'flex h-11 overflow-hidden rounded-lg';
+const swatchFlex = ['flex-[6]', 'flex-[3]', 'flex-[1]'];
 const modalBackdrop = 'fixed inset-0 z-50 flex items-center justify-center bg-[rgba(16,45,47,0.45)] p-4';
 const modalDialog = 'relative max-h-[90vh] w-[min(640px,100%)] overflow-y-auto rounded-xl bg-surface p-6 shadow-[0_24px_60px_rgba(16,45,47,0.25)]';
 const modalClose = 'absolute right-3 top-3 grid h-8 w-8 cursor-pointer place-items-center rounded-full border-0 bg-surface-tint text-[20px] leading-none text-ink';
@@ -240,7 +257,7 @@ function OverviewPanel({ customerCount, onNavigate }) {
   const todayAppointments = getAppointmentsForDate(new Date());
 
   return (
-    <div className="page-content">
+    <div className={pageContent}>
       <div className="flex items-center justify-between gap-5 pb-1 max-[760px]:flex-col max-[760px]:items-start">
         <div>
           <h2 className="m-0 text-[21px] leading-[1.3] tracking-[-0.02em]">La jornada en marcha</h2>
@@ -262,10 +279,10 @@ function OverviewPanel({ customerCount, onNavigate }) {
 
       <div className="grid grid-cols-[minmax(0,1.7fr)_minmax(280px,0.9fr)] items-start gap-5 max-[1100px]:grid-cols-1">
         <section className={contentSection}>
-          <div className="section-heading">
+          <div className={sectionHeading}>
             <div>
-              <h2>Trabajo de hoy</h2>
-              <p>Seguimiento de las citas de demostración.</p>
+              <h2 className={sectionTitle}>Trabajo de hoy</h2>
+              <p className={sectionText}>Seguimiento de las citas de demostración.</p>
             </div>
             <button className={textButton} onClick={() => onNavigate('appointments')} type="button">
               Ver todas
@@ -289,10 +306,10 @@ function OverviewPanel({ customerCount, onNavigate }) {
         </section>
 
         <aside className={`${contentSection} pt-[22px] px-[18px] pb-2.5`}>
-          <div className="section-heading">
+          <div className={sectionHeading}>
             <div>
-              <h2>Por resolver</h2>
-              <p>Elementos de ejemplo que requieren seguimiento.</p>
+              <h2 className={sectionTitle}>Por resolver</h2>
+              <p className={sectionText}>Elementos de ejemplo que requieren seguimiento.</p>
             </div>
           </div>
           <button className="grid w-full grid-cols-[10px_minmax(0,1fr)_12px] items-center gap-[11px] border-0 border-t border-[#e6ece9] bg-transparent px-0.5 py-[15px] text-left text-text group" onClick={() => onNavigate('estimates')} type="button">
@@ -332,16 +349,17 @@ function CustomersPanel({
   const [vehiculosCliente, setVehiculosCliente] = useState(null);
 
   return (
-    <div className="customer-layout">
-      <section className="content-section">
-        <div className="section-heading customer-heading">
+    <div className={customerLayout}>
+      <section className={contentSection}>
+        <div className={`${sectionHeading} items-center max-[760px]:flex-col max-[760px]:items-start`}>
           <div>
-            <h2>Registro de clientes</h2>
-            <p>{clientes.length} registros activos</p>
+            <h2 className={sectionTitle}>Registro de clientes</h2>
+            <p className={sectionText}>{clientes.length} registros activos</p>
           </div>
-          <label className="search-field">
+          <label className={searchField}>
             <span className="sr-only">Buscar clientes</span>
             <input
+              className={formInput}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Buscar nombre, email o teléfono"
               type="search"
@@ -350,34 +368,34 @@ function CustomersPanel({
           </label>
         </div>
 
-        {loading && <p className="loading-message">Cargando clientes…</p>}
+        {loading && <p className={loadingMessage}>Cargando clientes…</p>}
         {!loading && clientes.length === 0 && (
-          <div className="empty-state">
-            <h3>{search ? 'No hay resultados' : 'Todavía no hay clientes'}</h3>
-            <p>Añade un cliente para empezar a organizar su historial.</p>
+          <div className={emptyState}>
+            <h3 className="m-0 text-[15px] text-text">{search ? 'No hay resultados' : 'Todavía no hay clientes'}</h3>
+            <p className="mb-0 mt-[7px] text-[13px] leading-[1.5]">Añade un cliente para empezar a organizar su historial.</p>
           </div>
         )}
         {!loading && clientes.length > 0 && (
-          <div className="table-scroll">
-            <table className="data-table">
+          <div className={tableScroll}>
+            <table className={dataTable}>
               <thead>
-                <tr><th>Nombre</th><th>Contacto</th><th><span className="sr-only">Acciones</span></th></tr>
+                <tr><th className={tableHeadCell}>Nombre</th><th className={tableHeadCell}>Contacto</th><th className={tableHeadCell}><span className="sr-only">Acciones</span></th></tr>
               </thead>
               <tbody>
                 {clientes.map((cliente) => (
                   <tr key={cliente.id}>
-                    <td>
+                    <td className={tableCell}>
                       <strong>{cliente.nombre}</strong>
-                      {cliente.notas && <small className="table-detail">{cliente.notas}</small>}
+                      {cliente.notas && <small className={tableDetail}>{cliente.notas}</small>}
                     </td>
-                    <td>
+                    <td className={tableCell}>
                       <span>{cliente.email || 'Sin email'}</span>
-                      <small className="table-detail">{cliente.telefono || 'Sin teléfono'}</small>
+                      <small className={tableDetail}>{cliente.telefono || 'Sin teléfono'}</small>
                     </td>
-                    <td className="table-actions">
-                      <button aria-label="Editar" className="action-chip action-icon action-edit" data-tooltip="Editar" onClick={() => onEdit(cliente)} type="button"><Icon name="edit" /></button>
-                      <button aria-label="Coches" className="action-chip action-icon action-cars" data-tooltip="Coches" onClick={() => setVehiculosCliente(cliente)} type="button"><Icon name="car" /></button>
-                      <button aria-label="Archivar" className="action-chip action-icon action-archive" data-tooltip="Archivar" onClick={() => onArchive(cliente.id)} type="button"><Icon name="archive" /></button>
+                    <td className={`table-actions ${tableCell} ${tableActions}`}>
+                      <button aria-label="Editar" className={`action-icon action-edit ${actionIcon} ${actionTone.edit}`} data-tooltip="Editar" onClick={() => onEdit(cliente)} type="button"><Icon name="edit" /></button>
+                      <button aria-label="Coches" className={`action-icon action-cars ${actionIcon} ${actionTone.cars}`} data-tooltip="Coches" onClick={() => setVehiculosCliente(cliente)} type="button"><Icon name="car" /></button>
+                      <button aria-label="Archivar" className={`action-icon action-archive ${actionIcon} ${actionTone.archive}`} data-tooltip="Archivar" onClick={() => onArchive(cliente.id)} type="button"><Icon name="archive" /></button>
                     </td>
                   </tr>
                 ))}
@@ -387,38 +405,38 @@ function CustomersPanel({
         )}
       </section>
 
-      <section className="content-section form-section">
-        <div className="section-heading">
+      <section className={contentSection}>
+        <div className={`${sectionHeading} !mb-5`}>
           <div>
-            <h2>{editingCliente ? 'Editar cliente' : 'Nuevo cliente'}</h2>
-            <p>Los campos marcados son necesarios para guardar.</p>
+            <h2 className={sectionTitle}>{editingCliente ? 'Editar cliente' : 'Nuevo cliente'}</h2>
+            <p className={sectionText}>Los campos marcados son necesarios para guardar.</p>
           </div>
         </div>
-        <form className="customer-form" onSubmit={onSubmit}>
-          <label>
+        <form className={customerForm} onSubmit={onSubmit}>
+          <label className={formLabel}>
             Nombre *
-            <input name="nombre" onChange={onFormChange} required value={form.nombre} />
+            <input className={formInput} name="nombre" onChange={onFormChange} required value={form.nombre} />
           </label>
-          <label>
+          <label className={formLabel}>
             Email
-            <input name="email" onChange={onFormChange} type="email" value={form.email} />
+            <input className={formInput} name="email" onChange={onFormChange} type="email" value={form.email} />
           </label>
-          <label>
+          <label className={formLabel}>
             Teléfono
-            <input name="telefono" onChange={onFormChange} type="tel" value={form.telefono} />
+            <input className={formInput} name="telefono" onChange={onFormChange} type="tel" value={form.telefono} />
           </label>
-          <label>
+          <label className={formLabel}>
             Notas
-            <textarea name="notas" onChange={onFormChange} rows="4" value={form.notas} />
+            <textarea className={`${formInput} resize-y`} name="notas" onChange={onFormChange} rows="4" value={form.notas} />
           </label>
-          <div className="form-actions">
-            <button className="primary-button" disabled={loading} type="submit">
+          <div className={formActions}>
+            <button className={primaryButton} disabled={loading} type="submit">
               <Icon name="save" />
               {loading ? 'Guardando…' : editingCliente ? 'Guardar cambios' : 'Crear cliente'}
             </button>
             {editingCliente && (
               <button
-                className="secondary-button"
+                className={secondaryButton}
                 onClick={onCancel}
                 type="button"
               >
@@ -513,33 +531,33 @@ function VehiclesEditor({ cliente }) {
   }
 
   return (
-    <section className="content-section form-section vehicles-section">
-      <div className="section-heading">
+    <section className="min-w-0">
+      <div className={`${sectionHeading} !mb-5`}>
         <div>
-          <h2>Vehículos de {cliente.nombre}</h2>
-          <p>{vehiculos.length} registrados. Un cliente puede tener varios.</p>
+          <h2 className={sectionTitle}>Vehículos de {cliente.nombre}</h2>
+          <p className={sectionText}>{vehiculos.length} registrados. Un cliente puede tener varios.</p>
         </div>
       </div>
 
       {vehiculos.length > 0 && (
-        <div className="table-scroll">
-          <table className="data-table">
+        <div className={tableScroll}>
+          <table className={dataTable}>
             <thead>
-              <tr><th>Matrícula</th><th>Vehículo</th><th><span className="sr-only">Acciones</span></th></tr>
+              <tr><th className={tableHeadCell}>Matrícula</th><th className={tableHeadCell}>Vehículo</th><th className={tableHeadCell}><span className="sr-only">Acciones</span></th></tr>
             </thead>
             <tbody>
               {vehiculos.map((vehiculo) => (
                 <tr key={vehiculo.id}>
-                  <td><strong>{vehiculo.matricula}</strong></td>
-                  <td>
+                  <td className={tableCell}><strong>{vehiculo.matricula}</strong></td>
+                  <td className={tableCell}>
                     <span>{[vehiculo.marca, vehiculo.modelo].filter(Boolean).join(' ')}</span>
-                    <small className="table-detail">
+                    <small className={tableDetail}>
                       {[vehiculo.anio, vehiculo.km != null ? `${vehiculo.km} km` : null].filter(Boolean).join(' · ') || 'Sin año ni kilómetros'}
                     </small>
                   </td>
-                  <td className="table-actions">
-                    <button className="action-chip action-edit" onClick={() => startEditing(vehiculo)} type="button"><Icon name="edit" />Editar</button>
-                    <button className="action-chip action-archive" onClick={() => archiveVehiculo(vehiculo.id)} type="button"><Icon name="archive" />Archivar</button>
+                  <td className={`${tableCell} ${tableActions}`}>
+                    <button className={`${actionChip} ${actionTone.edit}`} onClick={() => startEditing(vehiculo)} type="button"><Icon name="edit" />Editar</button>
+                    <button className={`${actionChip} ml-[5px] ${actionTone.archive}`} onClick={() => archiveVehiculo(vehiculo.id)} type="button"><Icon name="archive" />Archivar</button>
                   </td>
                 </tr>
               ))}
@@ -548,35 +566,35 @@ function VehiclesEditor({ cliente }) {
         </div>
       )}
 
-      <form className="customer-form" onSubmit={handleSubmit}>
-        <label>
+      <form className={customerForm} onSubmit={handleSubmit}>
+        <label className={formLabel}>
           Matrícula *
-          <input name="matricula" onChange={handleChange} required value={form.matricula} />
+          <input className={formInput} name="matricula" onChange={handleChange} required value={form.matricula} />
         </label>
-        <label>
+        <label className={formLabel}>
           Marca *
-          <input name="marca" onChange={handleChange} required value={form.marca} />
+          <input className={formInput} name="marca" onChange={handleChange} required value={form.marca} />
         </label>
-        <label>
+        <label className={formLabel}>
           Modelo
-          <input name="modelo" onChange={handleChange} value={form.modelo} />
+          <input className={formInput} name="modelo" onChange={handleChange} value={form.modelo} />
         </label>
-        <label>
+        <label className={formLabel}>
           Año
-          <input min="0" name="anio" onChange={handleChange} type="number" value={form.anio} />
+          <input className={formInput} min="0" name="anio" onChange={handleChange} type="number" value={form.anio} />
         </label>
-        <label>
+        <label className={formLabel}>
           Kilómetros
-          <input min="0" name="km" onChange={handleChange} type="number" value={form.km} />
+          <input className={formInput} min="0" name="km" onChange={handleChange} type="number" value={form.km} />
         </label>
-        {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="form-actions">
-          <button className="primary-button" disabled={loading} type="submit">
+        {error && <p className={formError} role="alert">{error}</p>}
+        <div className={formActions}>
+          <button className={primaryButton} disabled={loading} type="submit">
             <Icon name="save" />
             {loading ? 'Guardando…' : editingId ? 'Guardar vehículo' : 'Añadir vehículo'}
           </button>
           {editingId && (
-            <button className="secondary-button" onClick={resetForm} type="button"><Icon name="close" />Cancelar</button>
+            <button className={secondaryButton} onClick={resetForm} type="button"><Icon name="close" />Cancelar</button>
           )}
         </div>
       </form>
@@ -594,15 +612,15 @@ function VehiclesModal({ cliente, onClose }) {
   }, [onClose]);
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="presentation">
+    <div className={modalBackdrop} onClick={onClose} role="presentation">
       <div
         aria-label={`Vehículos de ${cliente.nombre}`}
         aria-modal="true"
-        className="modal-dialog"
+        className={modalDialog}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
       >
-        <button aria-label="Cerrar" className="modal-close" onClick={onClose} type="button">×</button>
+        <button aria-label="Cerrar" className={modalClose} onClick={onClose} type="button">×</button>
         <VehiclesEditor cliente={cliente} />
       </div>
     </div>
@@ -611,23 +629,23 @@ function VehiclesModal({ cliente, onClose }) {
 
 function EstimatesPanel() {
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Presupuestos recientes</h2><p>Estados y valores ficticios para probar la vista.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Presupuestos recientes</h2><p className={sectionText}>Estados y valores ficticios para probar la vista.</p></div>
         <StatusBadge tone="demo">Datos demo</StatusBadge>
       </div>
       <DemoNotice />
-      <div className="content-section table-scroll">
-        <table className="data-table">
-          <thead><tr><th>Referencia</th><th>Cliente y vehículo</th><th>Fecha</th><th>Importe</th><th>Estado</th></tr></thead>
+      <div className={`${contentSection} ${tableScroll}`}>
+        <table className={dataTable}>
+          <thead><tr><th className={tableHeadCell}>Referencia</th><th className={tableHeadCell}>Cliente y vehículo</th><th className={tableHeadCell}>Fecha</th><th className={tableHeadCell}>Importe</th><th className={tableHeadCell}>Estado</th></tr></thead>
           <tbody>
             {demoEstimates.map((estimate) => (
               <tr key={estimate.id}>
-                <td><strong>{estimate.id}</strong></td>
-                <td><strong>{estimate.client}</strong><small className="table-detail">{estimate.vehicle}</small></td>
-                <td>{estimate.date}</td>
-                <td>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(estimate.amount)}</td>
-                <td><StatusBadge tone={estimate.status.toLowerCase()}>{estimate.status}</StatusBadge></td>
+                <td className={tableCell}><strong>{estimate.id}</strong></td>
+                <td className={tableCell}><strong>{estimate.client}</strong><small className={tableDetail}>{estimate.vehicle}</small></td>
+                <td className={tableCell}>{estimate.date}</td>
+                <td className={tableCell}>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(estimate.amount)}</td>
+                <td className={tableCell}><StatusBadge tone={estimate.status.toLowerCase()}>{estimate.status}</StatusBadge></td>
               </tr>
             ))}
           </tbody>
@@ -644,18 +662,18 @@ function AppointmentsPanel() {
   const monthLabel = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(new Date());
 
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Agenda de hoy</h2><p>Las horas y los trabajos son ejemplos de demostración.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Agenda de hoy</h2><p className={sectionText}>Las horas y los trabajos son ejemplos de demostración.</p></div>
         <StatusBadge tone="demo">Datos demo</StatusBadge>
       </div>
       <DemoNotice />
-      <div className="calendar-toolbar">
-        <div aria-label="Vista de agenda" className="calendar-switch" role="group">
+      <div className={calendarToolbar}>
+        <div aria-label="Vista de agenda" className={calendarSwitch} role="group">
           {['day', 'week', 'month'].map((view) => (
             <button
               aria-pressed={calendarView === view}
-              className="calendar-tab"
+              className={calendarTab}
               key={view}
               onClick={() => setCalendarView(view)}
               type="button"
@@ -664,24 +682,24 @@ function AppointmentsPanel() {
             </button>
           ))}
         </div>
-        <p className="calendar-period">
+        <p className={calendarPeriod}>
           {calendarView === 'day' ? getTodayLabel() : calendarView === 'week' ? 'Semana actual' : monthLabel}
         </p>
       </div>
       {calendarView === 'day' && (
-        <section aria-label="Citas del día" className="content-section appointment-list">
+        <section aria-label="Citas del día" className={`${contentSection} py-1`}>
           {getAppointmentsForDate(new Date()).map((appointment) => (
-            <article className="appointment-row" key={appointment.id}>
-              <time className="appointment-time">{appointment.time}</time>
-              <div className="appointment-details">
-                <div className="job-title-line">
-                  <h3>{appointment.client}</h3>
-                  <span className="job-id">{appointment.id}</span>
+            <article className={appointmentRow} key={appointment.id}>
+              <time className={appointmentTime}>{appointment.time}</time>
+              <div className="min-w-0">
+                <div className={jobTitleLine}>
+                  <h3 className={jobTitle}>{appointment.client}</h3>
+                  <span className={jobId}>{appointment.id}</span>
                 </div>
-                <p>{appointment.vehicle} <span aria-hidden="true">·</span> {appointment.service}</p>
-                <ServiceProgress stage={appointment.stage} />
+                <p className={detailText}>{appointment.vehicle} <span aria-hidden="true">·</span> {appointment.service}</p>
+                <ServiceProgress className="max-w-[560px]" stage={appointment.stage} />
               </div>
-              <StatusBadge tone={appointment.stage === 3 ? 'aprobado' : appointment.stage === 0 ? 'pendiente' : 'neutral'}>
+              <StatusBadge className="max-[760px]:col-start-2 max-[760px]:justify-self-start" tone={appointment.stage === 3 ? 'aprobado' : appointment.stage === 0 ? 'pendiente' : 'neutral'}>
                 {progressSteps[appointment.stage]}
               </StatusBadge>
             </article>
@@ -689,23 +707,23 @@ function AppointmentsPanel() {
         </section>
       )}
       {calendarView === 'week' && (
-        <div className="week-calendar-scroll">
-          <div className="week-calendar">
+        <div className={weekScroll}>
+          <div className={weekCalendar}>
             {weekDates.map((date) => (
-              <section className="week-day" key={getDateKey(date)}>
-                <h3>
+              <section className={weekDay} key={getDateKey(date)}>
+                <h3 className={weekDayHeading}>
                   <span>{new Intl.DateTimeFormat('es-ES', { weekday: 'short' }).format(date)}</span>
-                  <strong className={getDateKey(date) === getDateKey(new Date()) ? 'today' : ''}>{date.getDate()}</strong>
+                  <strong className={`${weekDayNumber} ${getDateKey(date) === getDateKey(new Date()) ? 'bg-lime text-ink-deep' : ''}`}>{date.getDate()}</strong>
                 </h3>
-                <div className="week-events">
+                <div className={weekEvents}>
                   {getAppointmentsForDate(date).map((appointment) => (
-                    <article className="week-event" key={appointment.id}>
-                      <time>{appointment.time}</time>
-                      <strong>{appointment.client}</strong>
-                      <span>{appointment.service}</span>
+                    <article className={weekEvent} key={appointment.id}>
+                      <time className="text-[11px] tabular-nums">{appointment.time}</time>
+                      <strong className="text-[11px] tabular-nums">{appointment.client}</strong>
+                      <span className="text-[10px] leading-[1.35] text-[#526461]">{appointment.service}</span>
                     </article>
                   ))}
-                  {getAppointmentsForDate(date).length === 0 && <p className="no-events">Sin citas</p>}
+                  {getAppointmentsForDate(date).length === 0 && <p className={noEvents}>Sin citas</p>}
                 </div>
               </section>
             ))}
@@ -713,10 +731,10 @@ function AppointmentsPanel() {
         </div>
       )}
       {calendarView === 'month' && (
-        <div className="month-calendar-scroll">
-          <div aria-label={`Calendario de ${monthLabel}`} className="month-calendar" role="grid">
+        <div className={monthScroll}>
+          <div aria-label={`Calendario de ${monthLabel}`} className={monthCalendar} role="grid">
             {['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((day) => (
-              <div className="month-weekday" key={day} role="columnheader">{day}</div>
+              <div className={monthWeekday} key={day} role="columnheader">{day}</div>
             ))}
             {monthDates.map((date) => {
               const isCurrentMonth = date.getMonth() === new Date().getMonth()
@@ -733,14 +751,14 @@ function AppointmentsPanel() {
                 <div
                   aria-current={isToday ? 'date' : undefined}
                   aria-label={appointmentLabel ? `${dateLabel}: ${appointmentLabel}` : dateLabel}
-                  className={`month-day${isCurrentMonth ? '' : ' is-outside'}${isToday ? ' is-today' : ''}`}
+                  className={`${monthDay}${isCurrentMonth ? '' : ' bg-[#f5f7f6] text-[#8a9995]'}${isToday ? ' bg-[#f5f9e9]' : ''}`}
                   key={getDateKey(date)}
                   role="gridcell"
                 >
-                  <span className="month-day-number">{date.getDate()}</span>
+                  <span className={`${monthDayNumber} ${isToday ? 'rounded-full bg-lime text-ink-deep' : ''}`}>{date.getDate()}</span>
                   {appointments.map((appointment) => (
-                    <span className="month-event" key={appointment.id}>
-                      <span aria-hidden="true" className="month-event-dot" />
+                    <span className={monthEvent} key={appointment.id}>
+                      <span aria-hidden="true" className={monthEventDot} />
                       {appointment.time} · {appointment.client}
                     </span>
                   ))}
@@ -756,25 +774,25 @@ function AppointmentsPanel() {
 
 function InventoryPanel() {
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Existencias</h2><p>Unidades disponibles frente al mínimo orientativo.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Existencias</h2><p className={sectionText}>Unidades disponibles frente al mínimo orientativo.</p></div>
         <StatusBadge tone="demo">Datos demo</StatusBadge>
       </div>
       <DemoNotice />
-      <div className="content-section table-scroll">
-        <table className="data-table">
-          <thead><tr><th>Referencia</th><th>Repuesto</th><th>Disponible</th><th>Mínimo</th><th>Estado</th></tr></thead>
+      <div className={`${contentSection} ${tableScroll}`}>
+        <table className={dataTable}>
+          <thead><tr><th className={tableHeadCell}>Referencia</th><th className={tableHeadCell}>Repuesto</th><th className={tableHeadCell}>Disponible</th><th className={tableHeadCell}>Mínimo</th><th className={tableHeadCell}>Estado</th></tr></thead>
           <tbody>
             {demoParts.map((part) => {
               const lowStock = part.stock < part.minimum;
               return (
                 <tr key={part.sku}>
-                  <td><strong>{part.sku}</strong></td>
-                  <td><strong>{part.name}</strong><small className="table-detail">{part.detail}</small></td>
-                  <td className="numeric-cell">{part.stock} un.</td>
-                  <td className="numeric-cell">{part.minimum} un.</td>
-                  <td><StatusBadge tone={lowStock ? 'rechazado' : 'aprobado'}>{lowStock ? 'Reponer' : 'En stock'}</StatusBadge></td>
+                  <td className={tableCell}><strong>{part.sku}</strong></td>
+                  <td className={tableCell}><strong>{part.name}</strong><small className={tableDetail}>{part.detail}</small></td>
+                  <td className={`${tableCell} ${numericCell}`}>{part.stock} un.</td>
+                  <td className={`${tableCell} ${numericCell}`}>{part.minimum} un.</td>
+                  <td className={tableCell}><StatusBadge tone={lowStock ? 'rechazado' : 'aprobado'}>{lowStock ? 'Reponer' : 'En stock'}</StatusBadge></td>
                 </tr>
               );
             })}
@@ -787,19 +805,19 @@ function InventoryPanel() {
 
 function TeamPanel() {
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Equipo del taller</h2><p>Personas y estados de turno ficticios.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Equipo del taller</h2><p className={sectionText}>Personas y estados de turno ficticios.</p></div>
         <StatusBadge tone="demo">Datos demo</StatusBadge>
       </div>
       <DemoNotice />
-      <section className="content-section team-list">
+      <section className={`${contentSection} py-1`}>
         {demoStaff.map((member) => (
-          <article className="team-row" key={member.initials}>
-            <span aria-hidden="true" className="team-initials">{member.initials}</span>
-            <div className="team-person"><h3>{member.name}</h3><p>{member.role}</p></div>
-            <span className="team-shift">{member.shift}</span>
-            <StatusBadge tone={member.status === 'En turno' ? 'aprobado' : 'neutral'}>{member.status}</StatusBadge>
+          <article className={teamRow} key={member.initials}>
+            <span aria-hidden="true" className={teamInitials}>{member.initials}</span>
+            <div><h3 className={jobTitle}>{member.name}</h3><p className={detailText}>{member.role}</p></div>
+            <span className={teamShift}>{member.shift}</span>
+            <StatusBadge className="max-[760px]:col-start-3 max-[760px]:row-start-1 max-[760px]:row-span-2" tone={member.status === 'En turno' ? 'aprobado' : 'neutral'}>{member.status}</StatusBadge>
           </article>
         ))}
       </section>
@@ -809,24 +827,24 @@ function TeamPanel() {
 
 function SettingsPanel({ palette, onPaletteChange }) {
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Paleta de colores</h2><p>Regla 60-30-10: 60% base, 30% secundario y 10% acento.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Paleta de colores</h2><p className={sectionText}>Regla 60-30-10: 60% base, 30% secundario y 10% acento.</p></div>
       </div>
-      <div className="palette-grid">
+      <div className={paletteGrid}>
         {paletteOptions.map((option) => (
           <button
             aria-pressed={palette === option.id}
-            className="palette-card"
+            className={paletteCard}
             key={option.id}
             onClick={() => onPaletteChange(option.id)}
             type="button"
           >
-            <span className="palette-swatches" aria-hidden="true">
-              {option.colors.map((color) => <span key={color} style={{ background: color }} />)}
+            <span className={paletteSwatches} aria-hidden="true">
+              {option.colors.map((color, index) => <span className={swatchFlex[index]} key={color} style={{ background: color }} />)}
             </span>
             <strong>{option.label}</strong>
-            <small>{option.colors.join(' · ')}</small>
+            <small className="text-[14px] text-muted">{option.colors.join(' · ')}</small>
           </button>
         ))}
       </div>
@@ -836,20 +854,20 @@ function SettingsPanel({ palette, onPaletteChange }) {
 
 function SchedulePanel() {
   return (
-    <div className="page-content">
-      <div className="section-heading">
-        <div><h2>Turnos de esta semana</h2><p>Planificación ficticia, de lunes a viernes.</p></div>
+    <div className={pageContent}>
+      <div className={sectionHeading}>
+        <div><h2 className={sectionTitle}>Turnos de esta semana</h2><p className={sectionText}>Planificación ficticia, de lunes a viernes.</p></div>
         <StatusBadge tone="demo">Datos demo</StatusBadge>
       </div>
       <DemoNotice />
-      <div className="content-section table-scroll">
-        <table className="data-table schedule-table">
-          <thead><tr><th>Persona</th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th></tr></thead>
+      <div className={`${contentSection} ${tableScroll}`}>
+        <table className={`${dataTable} min-w-[740px]`}>
+          <thead><tr><th className={tableHeadCell}>Persona</th><th className={tableHeadCell}>Lun</th><th className={tableHeadCell}>Mar</th><th className={tableHeadCell}>Mié</th><th className={tableHeadCell}>Jue</th><th className={tableHeadCell}>Vie</th></tr></thead>
           <tbody>
             {demoShifts.map((shift) => (
               <tr key={shift.name}>
-                <td><strong>{shift.name}</strong><small className="table-detail">{shift.role}</small></td>
-                <td>{shift.monday}</td><td>{shift.tuesday}</td><td>{shift.wednesday}</td><td>{shift.thursday}</td><td>{shift.friday}</td>
+                <td className={tableCell}><strong>{shift.name}</strong><small className={tableDetail}>{shift.role}</small></td>
+                <td className={`${tableCell} whitespace-nowrap text-[12px]`}>{shift.monday}</td><td className={`${tableCell} whitespace-nowrap text-[12px]`}>{shift.tuesday}</td><td className={`${tableCell} whitespace-nowrap text-[12px]`}>{shift.wednesday}</td><td className={`${tableCell} whitespace-nowrap text-[12px]`}>{shift.thursday}</td><td className={`${tableCell} whitespace-nowrap text-[12px]`}>{shift.friday}</td>
               </tr>
             ))}
           </tbody>
@@ -1017,7 +1035,7 @@ function App() {
             {error && (
               <p className="m-0 rounded-lg border border-[#f1c7c1] bg-red-bg px-3.5 py-3 text-[14px] text-red" role="alert">{error}</p>
             )}
-            <button className="primary-button mt-1 w-full" disabled={loading} type="submit">
+            <button className={`${primaryButton} mt-1 w-full`} disabled={loading} type="submit">
               {loading ? 'Procesando…' : registering ? 'Crear cuenta' : 'Entrar'}
             </button>
           </form>
