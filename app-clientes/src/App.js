@@ -109,23 +109,79 @@ function DemoNotice({ children = 'Datos sintéticos de demostración. No se guar
   return <p className="m-0 rounded-[10px] border border-[#c9d8d1] bg-[#e2ece7] px-[15px] py-3 text-[13px] leading-[1.5] text-[#38595a]">{children}</p>;
 }
 
-function StatusBadge({ children, tone = 'neutral' }) {
-  return <span className={`status-badge status-${tone}`}>{children}</span>;
+function StatusBadge({ children, tone = 'neutral', className = '' }) {
+  return <span className={`status-badge status-${tone} ${className}`}>{children}</span>;
 }
 
-function ServiceProgress({ stage }) {
+const primaryButton = 'inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-[9px] rounded-lg border border-lime bg-lime px-4 py-2.5 font-[650] text-on-accent shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 hover:enabled:brightness-[1.06] hover:enabled:shadow-[0_4px_12px_rgba(15,23,42,0.18)] active:enabled:scale-95 disabled:cursor-wait disabled:opacity-65 [&_.icon]:h-[15px] [&_.icon]:w-[15px] [&_.icon]:stroke-2';
+const secondaryButton = 'inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-[9px] rounded-lg border border-line bg-surface px-[13px] py-[9px] text-[13px] font-[650] text-ink shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 hover:border-[#aabbb5] hover:bg-surface-tint active:scale-95 [&_.icon]:h-[15px] [&_.icon]:w-[15px] [&_.icon]:stroke-2';
+const customerForm = 'grid gap-[15px]';
+const formActions = 'mt-1 flex flex-wrap gap-2';
+const formLabel = 'grid gap-2 text-[13px] font-[650] text-text';
+const formInput = 'min-h-10 w-full rounded-lg border border-[#bccbc6] bg-surface px-3 py-2.5 text-[13px] font-normal text-text';
+const formError = 'm-0 rounded-lg border border-[#f1c7c1] bg-red-bg px-3.5 py-3 text-[14px] text-red';
+const actionChip = 'inline-flex min-h-8 cursor-pointer items-center gap-1.5 rounded-lg border-0 px-[11px] py-1.5 text-[13px] font-semibold shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 hover:brightness-[1.06] hover:shadow-[0_4px_10px_rgba(15,23,42,0.18)] active:scale-95 [&_.icon]:h-[15px] [&_.icon]:w-[15px] [&_.icon]:stroke-2';
+const actionIcon = 'relative mr-2 inline-flex h-10 min-h-0 w-10 cursor-pointer items-center justify-center rounded-lg border-0 p-0 text-[13px] font-semibold shadow-[0_1px_2px_rgba(15,23,42,0.12)] transition duration-200 last:mr-0 hover:brightness-[1.06] hover:shadow-[0_4px_10px_rgba(15,23,42,0.18)] active:scale-95 [&_.icon]:h-5 [&_.icon]:w-5 [&_.icon]:stroke-2';
+const actionTone = {
+  edit: 'bg-[color-mix(in_srgb,var(--ink)_80%,transparent)] text-[#fff]',
+  cars: 'bg-[color-mix(in_srgb,var(--lime)_80%,transparent)] text-on-accent',
+  archive: 'bg-[color-mix(in_srgb,var(--red)_80%,transparent)] text-[#fff]',
+};
+const textButton = 'inline-flex min-h-[34px] cursor-pointer items-center justify-center rounded-lg border-0 bg-transparent px-[9px] py-1.5 text-[13px] font-[650] text-ink transition-colors duration-200 hover:text-lime-deep hover:underline hover:underline-offset-[3px]';
+const contentSection = 'min-w-0 rounded-xl border border-line bg-surface p-[22px] max-[760px]:p-[17px]';
+const sectionHeading = 'flex items-start justify-between gap-4';
+const sectionTitle = 'm-0 text-[18px] leading-[1.3] tracking-[-0.02em]';
+const sectionText = 'mb-0 mt-1.5 text-[13px] leading-[1.5] text-muted';
+const searchField = 'block w-[min(100%,290px)] max-[760px]:w-full';
+const emptyState = 'rounded-[10px] border border-dashed border-[#b9c9c3] px-4 py-9 text-center text-muted';
+const loadingMessage = 'px-4 py-9 text-center text-muted';
+const tableActions = 'whitespace-nowrap';
+const modalBackdrop = 'fixed inset-0 z-50 flex items-center justify-center bg-[rgba(16,45,47,0.45)] p-4';
+const modalDialog = 'relative max-h-[90vh] w-[min(640px,100%)] overflow-y-auto rounded-xl bg-surface p-6 shadow-[0_24px_60px_rgba(16,45,47,0.25)]';
+const modalClose = 'absolute right-3 top-3 grid h-8 w-8 cursor-pointer place-items-center rounded-full border-0 bg-surface-tint text-[20px] leading-none text-ink';
+const calendarToolbar = 'flex items-center justify-between gap-4 max-[760px]:flex-col max-[760px]:items-start';
+const calendarSwitch = 'inline-flex gap-[3px] rounded-[9px] bg-[#e2ebe6] p-1';
+const calendarTab = 'min-h-[34px] cursor-pointer rounded-[7px] border-0 bg-transparent px-[13px] py-1.5 text-[13px] font-[650] text-[#435d5b] transition-colors duration-200 aria-pressed:bg-surface aria-pressed:text-ink-deep aria-pressed:shadow-[0_1px_3px_rgb(21_56_58/0.13)]';
+const calendarPeriod = 'm-0 text-[13px] font-semibold text-muted';
+const weekScroll = 'min-w-0 overflow-x-auto pb-0.5 max-[760px]:overflow-visible';
+const weekCalendar = 'grid min-w-[820px] grid-cols-[repeat(7,minmax(112px,1fr))] overflow-hidden rounded-xl border border-line bg-surface max-[760px]:min-w-0 max-[760px]:grid-cols-[minmax(0,1fr)]';
+const weekDay = 'min-h-[280px] border-r border-line last:border-r-0 max-[760px]:grid max-[760px]:min-h-0 max-[760px]:grid-cols-[76px_minmax(0,1fr)] max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:last:border-b-0';
+const weekDayHeading = 'm-0 flex items-center justify-between border-b border-line bg-surface-tint px-2.5 py-3 text-[12px] capitalize text-muted max-[760px]:border-b-0 max-[760px]:items-start';
+const weekDayNumber = 'grid h-[26px] w-[26px] place-items-center rounded-full text-[12px] text-text';
+const weekEvents = 'grid content-start gap-2 p-2 max-[760px]:min-w-0 max-[760px]:border-l max-[760px]:border-line';
+const weekEvent = 'grid gap-1 rounded-[7px] border border-[#d5e5bb] bg-[#edf4e0] px-2 py-[9px] text-ink';
+const monthScroll = 'min-w-0 overflow-x-auto pb-0.5 max-[760px]:overflow-visible';
+const monthCalendar = 'grid min-w-[720px] grid-cols-[repeat(7,minmax(98px,1fr))] border-l border-t border-line bg-surface max-[760px]:min-w-0 max-[760px]:grid-cols-[repeat(7,minmax(0,1fr))]';
+const monthWeekday = 'border-b border-r border-line bg-surface-tint p-2.5 text-center text-[11px] font-bold text-[#4b6260] max-[760px]:px-0.5 max-[760px]:py-2 max-[760px]:text-[9px]';
+const monthDay = 'relative min-h-24 min-w-0 border-b border-r border-line p-2 max-[760px]:min-h-[58px] max-[760px]:p-1';
+const monthDayNumber = 'inline-grid h-[25px] w-[25px] place-items-center text-[12px] font-[650] tabular-nums max-[760px]:h-[21px] max-[760px]:w-[21px] max-[760px]:text-[10px]';
+const monthEvent = 'mt-[5px] block overflow-hidden text-ellipsis whitespace-nowrap rounded bg-[#edf4e0] px-[5px] py-1 text-[9px] text-ink max-[760px]:h-[7px] max-[760px]:w-[7px] max-[760px]:rounded-full max-[760px]:bg-transparent max-[760px]:p-0 max-[760px]:text-[0]';
+const monthEventDot = 'hidden max-[760px]:block max-[760px]:h-[7px] max-[760px]:w-[7px] max-[760px]:rounded-full max-[760px]:bg-[#5a8225]';
+const appointmentRow = 'grid grid-cols-[70px_minmax(0,1fr)_auto] items-start gap-[18px] border-b border-[#e6ece9] py-[18px] last:border-b-0 max-[760px]:grid-cols-[48px_minmax(0,1fr)] max-[760px]:gap-x-3 max-[760px]:gap-y-2';
+const appointmentTime = 'pt-0.5 text-[14px] font-[750] tabular-nums text-ink';
+const jobTitleLine = 'flex flex-wrap items-center gap-x-[11px] gap-y-2';
+const jobTitle = 'm-0 text-[14px] font-[700]';
+const jobId = 'text-[11px] tabular-nums text-muted';
+
+function ServiceProgress({ stage, className = '' }) {
   return (
-    <ol aria-label={`Estado del trabajo: ${progressSteps[stage]}`} className="service-progress">
-      {progressSteps.map((step, index) => (
-        <li
-          aria-current={index === stage ? 'step' : undefined}
-          className={index <= stage ? 'is-reached' : ''}
-          key={step}
-        >
-          <span className="progress-node" />
-          <span className="progress-label">{step}</span>
-        </li>
-      ))}
+    <ol aria-label={`Estado del trabajo: ${progressSteps[stage]}`} className={`mt-3.5 grid grid-cols-4 list-none p-0 max-[760px]:gap-px ${className}`}>
+      {progressSteps.map((step, index) => {
+        const reached = index <= stage;
+        const current = index === stage;
+        return (
+          <li
+            aria-current={current ? 'step' : undefined}
+            className={`relative grid min-w-0 grid-rows-[12px_auto] justify-items-start gap-[5px] text-[10px] leading-[1.2] text-[#748582] after:absolute after:left-[10px] after:top-[5px] after:h-0.5 after:w-[calc(100%_-_10px)] after:content-[''] last:after:hidden ${reached ? 'after:bg-[#93b94a]' : 'after:bg-[#dce5e1]'}`}
+            key={step}
+          >
+            <span
+              className={`relative z-[1] h-[11px] w-[11px] rounded-full border-2 ${current ? 'border-ink bg-lime shadow-[0_0_0_3px_#edf5d6]' : reached ? 'border-[#6a8c21] bg-[#a9cf50]' : 'border-[#bdcbc6] bg-surface'}`}
+            />
+            <span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">{step}</span>
+          </li>
+        );
+      })}
     </ol>
   );
 }
@@ -185,46 +241,46 @@ function OverviewPanel({ customerCount, onNavigate }) {
 
   return (
     <div className="page-content">
-      <div className="overview-intro">
+      <div className="flex items-center justify-between gap-5 pb-1 max-[760px]:flex-col max-[760px]:items-start">
         <div>
-          <h2>La jornada en marcha</h2>
-          <p>{getTodayLabel()} · actividad de ejemplo para explorar el panel</p>
+          <h2 className="m-0 text-[21px] leading-[1.3] tracking-[-0.02em]">La jornada en marcha</h2>
+          <p className="mt-1.5 text-[14px] leading-[1.5] text-muted">{getTodayLabel()} · actividad de ejemplo para explorar el panel</p>
         </div>
-        <button className="primary-button" onClick={() => onNavigate('appointments')} type="button">
+        <button className={`${primaryButton} max-[760px]:w-full`} onClick={() => onNavigate('appointments')} type="button">
           Abrir agenda
         </button>
       </div>
 
       <DemoNotice>Las citas, presupuestos y existencias de esta vista son ejemplos; no se guardan en la base de datos.</DemoNotice>
 
-      <section aria-label="Resumen operativo" className="summary-strip">
-        <p><strong>{customerCount}</strong><span>{customerCount === 1 ? 'cliente registrado' : 'clientes registrados'}</span></p>
-        <p><strong>{todayAppointments.length}</strong><span>citas de ejemplo hoy</span></p>
-        <p><strong>{pendingEstimates}</strong><span>presupuestos por revisar</span></p>
-        <p><strong>{lowStock}</strong><span>repuestos bajo mínimo</span></p>
+      <section aria-label="Resumen operativo" className="grid grid-cols-4 rounded-xl border border-line bg-surface py-[18px] max-[760px]:grid-cols-2 max-[760px]:gap-y-4 max-[760px]:py-4">
+        <p className="m-0 flex items-baseline gap-2.5 px-5 [p+&]:border-l [p+&]:border-line max-[1100px]:grid max-[1100px]:gap-0.5 max-[1100px]:px-3.5 max-[760px]:px-3.5 max-[760px]:[&:nth-child(3)]:border-l-0"><strong className="text-[24px] tabular-nums text-ink">{customerCount}</strong><span className="text-[12px] leading-[1.35] text-muted">{customerCount === 1 ? 'cliente registrado' : 'clientes registrados'}</span></p>
+        <p className="m-0 flex items-baseline gap-2.5 px-5 [p+&]:border-l [p+&]:border-line max-[1100px]:grid max-[1100px]:gap-0.5 max-[1100px]:px-3.5 max-[760px]:px-3.5 max-[760px]:[&:nth-child(3)]:border-l-0"><strong className="text-[24px] tabular-nums text-ink">{todayAppointments.length}</strong><span className="text-[12px] leading-[1.35] text-muted">citas de ejemplo hoy</span></p>
+        <p className="m-0 flex items-baseline gap-2.5 px-5 [p+&]:border-l [p+&]:border-line max-[1100px]:grid max-[1100px]:gap-0.5 max-[1100px]:px-3.5 max-[760px]:px-3.5 max-[760px]:[&:nth-child(3)]:border-l-0"><strong className="text-[24px] tabular-nums text-ink">{pendingEstimates}</strong><span className="text-[12px] leading-[1.35] text-muted">presupuestos por revisar</span></p>
+        <p className="m-0 flex items-baseline gap-2.5 px-5 [p+&]:border-l [p+&]:border-line max-[1100px]:grid max-[1100px]:gap-0.5 max-[1100px]:px-3.5 max-[760px]:px-3.5 max-[760px]:[&:nth-child(3)]:border-l-0"><strong className="text-[24px] tabular-nums text-ink">{lowStock}</strong><span className="text-[12px] leading-[1.35] text-muted">repuestos bajo mínimo</span></p>
       </section>
 
-      <div className="overview-grid">
-        <section className="content-section">
+      <div className="grid grid-cols-[minmax(0,1.7fr)_minmax(280px,0.9fr)] items-start gap-5 max-[1100px]:grid-cols-1">
+        <section className={contentSection}>
           <div className="section-heading">
             <div>
               <h2>Trabajo de hoy</h2>
               <p>Seguimiento de las citas de demostración.</p>
             </div>
-            <button className="text-button" onClick={() => onNavigate('appointments')} type="button">
+            <button className={textButton} onClick={() => onNavigate('appointments')} type="button">
               Ver todas
             </button>
           </div>
-          <div className="job-list">
+          <div className="grid">
             {todayAppointments.map((appointment) => (
-              <article className="job-row" key={appointment.id}>
-                <div className="job-time">{appointment.time}</div>
-                <div className="job-details">
-                  <div className="job-title-line">
-                    <h3>{appointment.client}</h3>
-                    <span className="job-id">{appointment.id}</span>
+              <article className="grid grid-cols-[58px_minmax(0,1fr)] gap-3.5 border-t border-[#e6ece9] py-[17px] max-[760px]:grid-cols-[48px_minmax(0,1fr)] max-[760px]:gap-2" key={appointment.id}>
+                <div className="pt-0.5 text-[14px] font-[750] tabular-nums text-ink">{appointment.time}</div>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-[11px] gap-y-2">
+                    <h3 className="m-0 text-[14px] font-[700]">{appointment.client}</h3>
+                    <span className="text-[11px] tabular-nums text-muted">{appointment.id}</span>
                   </div>
-                  <p>{appointment.vehicle} <span aria-hidden="true">·</span> {appointment.service}</p>
+                  <p className="mt-1 text-[12px] leading-[1.5] text-muted">{appointment.vehicle} <span aria-hidden="true">·</span> {appointment.service}</p>
                   <ServiceProgress stage={appointment.stage} />
                 </div>
               </article>
@@ -232,27 +288,27 @@ function OverviewPanel({ customerCount, onNavigate }) {
           </div>
         </section>
 
-        <aside className="content-section attention-section">
+        <aside className={`${contentSection} pt-[22px] px-[18px] pb-2.5`}>
           <div className="section-heading">
             <div>
               <h2>Por resolver</h2>
               <p>Elementos de ejemplo que requieren seguimiento.</p>
             </div>
           </div>
-          <button className="attention-link" onClick={() => onNavigate('estimates')} type="button">
-            <span className="attention-mark attention-amber" />
-            <span><strong>{pendingEstimates} presupuestos pendientes</strong><small>Revisar y comunicar al cliente</small></span>
-            <span aria-hidden="true" className="attention-arrow">›</span>
+          <button className="grid w-full grid-cols-[10px_minmax(0,1fr)_12px] items-center gap-[11px] border-0 border-t border-[#e6ece9] bg-transparent px-0.5 py-[15px] text-left text-text group" onClick={() => onNavigate('estimates')} type="button">
+            <span className="size-[9px] rounded-full bg-[#d7941e]" />
+            <span><strong className="block text-[13px] group-hover:text-lime-deep group-hover:underline group-hover:underline-offset-[3px]">{pendingEstimates} presupuestos pendientes</strong><small className="mt-1 block text-[11px] leading-[1.4] text-muted">Revisar y comunicar al cliente</small></span>
+            <span aria-hidden="true" className="text-[20px] text-muted">›</span>
           </button>
-          <button className="attention-link" onClick={() => onNavigate('inventory')} type="button">
-            <span className="attention-mark attention-red" />
-            <span><strong>{lowStock} referencias bajo mínimo</strong><small>Consultar el inventario de ejemplo</small></span>
-            <span aria-hidden="true" className="attention-arrow">›</span>
+          <button className="grid w-full grid-cols-[10px_minmax(0,1fr)_12px] items-center gap-[11px] border-0 border-t border-[#e6ece9] bg-transparent px-0.5 py-[15px] text-left text-text group" onClick={() => onNavigate('inventory')} type="button">
+            <span className="size-[9px] rounded-full bg-[#bd5548]" />
+            <span><strong className="block text-[13px] group-hover:text-lime-deep group-hover:underline group-hover:underline-offset-[3px]">{lowStock} referencias bajo mínimo</strong><small className="mt-1 block text-[11px] leading-[1.4] text-muted">Consultar el inventario de ejemplo</small></span>
+            <span aria-hidden="true" className="text-[20px] text-muted">›</span>
           </button>
-          <button className="attention-link" onClick={() => onNavigate('clients')} type="button">
-            <span className="attention-mark attention-teal" />
-            <span><strong>{customerCount} {customerCount === 1 ? 'cliente' : 'clientes'} en el registro</strong><small>Abrir la lista conectada al sistema</small></span>
-            <span aria-hidden="true" className="attention-arrow">›</span>
+          <button className="grid w-full grid-cols-[10px_minmax(0,1fr)_12px] items-center gap-[11px] border-0 border-t border-[#e6ece9] bg-transparent px-0.5 py-[15px] text-left text-text group" onClick={() => onNavigate('clients')} type="button">
+            <span className="size-[9px] rounded-full bg-[#4a8b7b]" />
+            <span><strong className="block text-[13px] group-hover:text-lime-deep group-hover:underline group-hover:underline-offset-[3px]">{customerCount} {customerCount === 1 ? 'cliente' : 'clientes'} en el registro</strong><small className="mt-1 block text-[11px] leading-[1.4] text-muted">Abrir la lista conectada al sistema</small></span>
+            <span aria-hidden="true" className="text-[20px] text-muted">›</span>
           </button>
         </aside>
       </div>
